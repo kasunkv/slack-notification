@@ -1,6 +1,4 @@
-import { ExceptionInfo } from '_debugger';
 import task = require('vsts-task-lib/task');
-import toolsRunner = require('vsts-task-lib/toolrunner');
 import request = require('request');
 import path = require('path');
 
@@ -9,12 +7,13 @@ task.setResourcePath(path.join(__dirname, 'task.json'));
 async function run() {
     const slackApiBase = 'https://slack.com/api/chat.postMessage';
 
-    // gather inputs
+    // Required Inputs
     let messageAuthor: string = task.getInput('MessageAuthor', true);
     let channel: string = task.getInput('Channel', true);
     let message: string = task.getInput('Message', true);
     let slackApiToken: string = task.getInput('SlackApiToken', true);
 
+    // Optional Inputs
     let iconUrl: string = task.getInput('IconUrl');
     let authorName: string = task.getInput('AuthorName');
     let authorLink: string = task.getInput('AuthorLink');
@@ -38,7 +37,8 @@ async function run() {
         "color": color,
         "image_url": imageUrl,
         "footer": footerText,
-        "footer_icon": footerIcon
+        "footer_icon": footerIcon,
+        "ts": new Date().getTime()
     };
 
     let attachmentList: Array<object> = [attachment];
@@ -53,7 +53,7 @@ async function run() {
         "icon_url": iconUrl,
         "username": messageAuthor,
         "unfurl_links": true, 
-        "attachments": attachmentListString,
+        "attachments": attachmentListString,        
         "pretty": 1
     };
 
@@ -63,13 +63,12 @@ async function run() {
         .post(slackApiBase)
         .form(slackMessageBody)
         .on('response', (response) => {
-            task.debug('Slack message posted successfully.');
+            task.debug('Slack message posted successfully.');            
         })
         .on('error', () => {
             task.error('Posting slack message failed');
             throw new Error('Failed to post slack message');
         });
-
 }
 
 run();
