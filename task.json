@@ -29,15 +29,7 @@
             "isExpanded": false
         }
     ],
-    "inputs": [        
-        {
-            "name": "Contents",
-            "type": "multiLine",
-            "label": "Contents",
-            "defaultValue": "myFileShare",
-            "required": true,
-            "helpMarkDown": "File/folder paths to delete. Supports multiple lines of minimatch patterns. [More Information](https://go.microsoft.com/fwlink/?LinkID=722333)"
-        },
+    "inputs": [
         {
             "name": "MessageAuthor",
             "type": "string",
