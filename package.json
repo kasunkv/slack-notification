@@ -4,7 +4,8 @@
   "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
   "main": "slacknotification.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc slacknotification.ts"
   },
   "repository": {
     "type": "git",
