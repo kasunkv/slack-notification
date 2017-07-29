@@ -18,7 +18,7 @@
     ],
     "tags": [ "build", "release", "notification", "slack", "chat", "messages" ],
     "icons": {
-        "default": "images/slack128x128.png"        
+        "default": "icon.png"        
     },
     "content": {
         "details": {
