@@ -3,7 +3,7 @@
     "id": "slack-notification",
     "name": "Slack Notification",
     "version": "1.0.0",
-    "publisher": "Kasun Kodagoda",
+    "publisher": "kasunkodagoda",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -18,7 +18,7 @@
     ],
     "tags": [ "build", "release", "notification", "slack", "chat", "messages" ],
     "icons": {
-        "default": "images/slack.png"        
+        "default": "images/slack256x256.png"        
     },
     "content": {
         "details": {
