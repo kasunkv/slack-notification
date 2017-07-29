@@ -1,0 +1,167 @@
+{
+    "$schema": "https://raw.githubusercontent.com/AArnott/vso-agent-tasks/9b41d803a/tasks.schema.json",
+    "id": "705424a3-ef1f-4c70-8dd0-56a63772146c",
+    "name": "SlackNotification",
+    "friendlyName": "Slack Notification",
+    "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
+    "helpMarkDown": "[More Information](https://github.com/kasunkv/slack-notification)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "author": "Kasun Kodagoda",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "demands": [],
+    "minimumAgentVersion": "1.92.0",
+    "groups": [
+        {
+            "name": "attachment",
+            "displayName": "Attachment Options",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [        
+        {
+            "name": "Contents",
+            "type": "multiLine",
+            "label": "Contents",
+            "defaultValue": "myFileShare",
+            "required": true,
+            "helpMarkDown": "File/folder paths to delete. Supports multiple lines of minimatch patterns. [More Information](https://go.microsoft.com/fwlink/?LinkID=722333)"
+        },
+        {
+            "name": "MessageAuthor",
+            "type": "string",
+            "label": "Message Author",
+            "required": true,
+            "defaultValue": "Visual Studio Team Services",
+            "helpMarkDown": "Text shown as the author of the message in Slack."
+        },
+        {
+            "name": "Channel",
+            "type": "string",
+            "label": "Channel",
+            "required": true,
+            "defaultValue": "#general",
+            "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
+        },
+        {
+            "name": "Message",
+            "type": "multiLine",
+            "label": "Message",
+            "required": true,
+            "helpMarkDown": "Message that needs to be posted to Slack channel or user. [Message Formatting](https://api.slack.com/docs/messages)"
+        },
+        {
+            "name": "SlackApiToken",
+            "type": "string",
+            "label": "Slack API Token",
+            "required": true,
+            "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
+        },
+        {
+            "name": "IconUrl",
+            "type": "string",
+            "label": "Icon URL",
+            "required": false,
+            "helpMarkDown": "The icon that will be shown along side the message."
+        },
+        {
+            "name": "AuthorName",
+            "type": "string",
+            "label": "Author Name",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Small text used to display the author's name."
+        },
+        {
+            "name": "AuthorLink",
+            "type": "string",
+            "label": "Author Link",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "A valid URL that will hyperlink the _Author Name_ text mentioned above. Will only work if _Author Name_ is present."
+        },
+        {
+            "name": "Title",
+            "type": "string",
+            "label": "Title",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "The _Title_ is displayed as larger, bold text near the top of a message attachment."
+        },
+        {
+            "name": "TitleLink",
+            "type": "string",
+            "label": "Title Link",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "A valid URL will hyperlink the _Text_ mentioned above."
+        },
+        {
+            "name": "PreText",
+            "type": "string",
+            "label": "Attachment Pre-Text",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "This is optional text that appears above the message attachment block."
+        },
+        {
+            "name": "Text",
+            "type": "multiLine",
+            "label": "Attachment Text",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "This is the main text in a message attachment, and can contain (Standard Slack Message Markup)[https://api.slack.com/docs/message-formatting]"
+        },
+        {
+            "name": "Color",
+            "type": "string",
+            "label": "Border Color",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Color of the border along the left side of the message attachment. Value that can either be one of _good_, _warning_, _danger_, or any _hex color code_ (eg. #439FE0)"
+        },
+        {
+            "name": "ImageUrl",
+            "type": "string",
+            "label": "Image URL",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "A valid URL to an image file that will be displayed inside a message attachment. Supports _gif_, _jpeg_, _png_, & _bmp_ formats."
+        },
+        {
+            "name": "FooterText",
+            "type": "string",
+            "label": "Footer Text",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Contextualize footer text for the attachment. Limited to 300 characters."
+        },
+        {
+            "name": "FooterIcon",
+            "type": "string",
+            "label": "Footer Icon",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Publicly accessible URL string that render a small icon beside your footer text."
+        }
+    ],
+    "instanceNameFormat": "Post Slack Notification",
+    "execution": {
+        "Node": {
+            "target": "slacknotification.js",
+            "argumentFormat": ""
+        }
+    },
+    "messages": { }
+}
