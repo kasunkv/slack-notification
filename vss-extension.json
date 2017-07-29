@@ -1,0 +1,76 @@
+{
+    "manifestVersion": 1,
+    "id": "slack-notification",
+    "name": "Slack Notification",
+    "version": "1.0.0",
+    "publisher": "Kasun Kodagoda",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
+    "categories": [
+        "Build and release"
+    ],
+    "galleryFlags": [
+        "Public"
+    ],
+    "tags": [ "build", "release", "notification", "slack", "chat", "messages" ],
+    "icons": {
+        "default": "images/slack.png"        
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "license.md"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/kasunkv/slack-notification/wiki"
+        },
+        "support": {
+            "uri": "https://github.com/kasunkv/slack-notification/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/kasunkv/slack-notification"
+        },
+        "issues": {
+            "uri": "https://github.com/kasunkv/slack-notification/issues"
+        }
+    },
+    "branding": {
+        "color": "rgb(28, 120, 25)",
+        "theme": "dark"
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/kasunkv/slack-notification"
+    },
+    "files": [
+        {
+            "path": "buildtask"
+        },
+        {
+            "path": "images"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "slack-notification-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildtask"
+            }
+        }
+    ],
+    "CustomerQnASupport": {
+        "enableqna":"true"
+    } 
+}
