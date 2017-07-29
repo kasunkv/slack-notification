@@ -1,0 +1,27 @@
+{
+  "name": "slack-notification",
+  "version": "1.0.0",
+  "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
+  "main": "slacknotification.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kasunkv/slack-notification.git"
+  },
+  "keywords": [
+    "slack",
+    "vsts",
+    "notification"
+  ],
+  "author": "Kasun Kodagoda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kasunkv/slack-notification/issues"
+  },
+  "homepage": "https://github.com/kasunkv/slack-notification#readme",
+  "dependencies": {
+    "vsts-task-lib": "^2.0.6"
+  }
+}
