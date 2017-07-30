@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "slack-notification",
     "name": "Slack Notification",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "kasunkodagoda",
     "targets": [
         {
