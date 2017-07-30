@@ -36,6 +36,7 @@ async function run() {
         "author_link": authorLink,
         "pretext": preText,
         "text": text,
+        "mrkdwn_in": ["text", "pretext"],
         "color": color,
         "image_url": imageUrl,
         "footer": footerText,
