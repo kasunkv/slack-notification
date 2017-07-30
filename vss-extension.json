@@ -13,6 +13,20 @@
     "categories": [
         "Build and release"
     ],
+    "screenshots": [
+        {
+            "path": "screenshots/screenshot-add-slack-notification-task.png"
+        },
+        {
+            "path": "screenshots/screenshot-required-options.png"
+        },
+        {
+            "path": "screenshots/screenshot-attachment-options.png"
+        },
+        {
+            "path": "screenshots/screenshot-slack-message.PNG"
+        }
+    ],
     "galleryFlags": [
         "Public"
     ],
@@ -53,6 +67,10 @@
     "files": [
         {
             "path": "buildtask"
+        },
+        {
+            "path": "screenshots",
+            "addressable": true
         }
     ],
     "contributions": [
