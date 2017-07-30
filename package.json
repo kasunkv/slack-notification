@@ -2,7 +2,7 @@
   "name": "slack-notification",
   "version": "1.0.0",
   "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
-  "main": "buildtask\\SlackNotification\\slacknotification.js",
+  "main": "slacknotification.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "npm install",
