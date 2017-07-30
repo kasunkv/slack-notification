@@ -3,6 +3,7 @@
     "id": "slack-notification",
     "name": "Slack Notification",
     "publisher": "kasunkodagoda",
+    "version": "0.0.0",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"

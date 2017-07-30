@@ -29,6 +29,11 @@
             "name": "attachment",
             "displayName": "Attachment Options",
             "isExpanded": false
+        },
+        {
+            "name": "notification",
+            "displayName": "Send Slack Notification",
+            "isExpanded": true
         }
     ],
     "inputs": [
@@ -38,6 +43,7 @@
             "label": "Message Author",
             "required": true,
             "defaultValue": "Visual Studio Team Services",
+            "groupName": "notification",
             "helpMarkDown": "Text shown as the author of the message in Slack."
         },
         {
@@ -46,6 +52,7 @@
             "label": "Channel",
             "required": true,
             "defaultValue": "#general",
+            "groupName": "notification",
             "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
         },
         {
@@ -53,6 +60,7 @@
             "type": "multiLine",
             "label": "Message",
             "required": true,
+            "groupName": "notification",
             "helpMarkDown": "Message that needs to be posted to Slack channel or user. [Message Formatting](https://api.slack.com/docs/messages)"
         },
         {
@@ -60,6 +68,7 @@
             "type": "string",
             "label": "Slack API Token",
             "required": true,
+            "groupName": "notification",
             "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
         },
         {
@@ -67,6 +76,7 @@
             "type": "string",
             "label": "Icon URL",
             "required": false,
+            "groupName": "notification",
             "helpMarkDown": "The icon that will be shown along side the message."
         },
         {
