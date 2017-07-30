@@ -26,6 +26,8 @@ async function run() {
     let footerText: string = task.getInput('FooterText');
     let footerIcon: string = task.getInput('FooterIcon');
 
+    let timeString: string = new Date().getTime().toString();
+    let timeTicks: string = timeString.substring(0, timeString.length - 3);
 
     let attachment: object = {
         "title": title,
@@ -38,7 +40,7 @@ async function run() {
         "image_url": imageUrl,
         "footer": footerText,
         "footer_icon": footerIcon,
-        "ts": new Date().getTime()
+        "ts": timeTicks
     };
 
     let attachmentList: Array<object> = [attachment];
