@@ -2,7 +2,6 @@
     "manifestVersion": 1,
     "id": "slack-notification",
     "name": "Slack Notification",
-    "version": "1.1.0",
     "publisher": "kasunkodagoda",
     "targets": [
         {
@@ -18,11 +17,11 @@
     ],
     "tags": [ "build", "release", "notification", "slack", "chat", "messages" ],
     "icons": {
-        "default": "icon.png"        
+        "default": "marketplace-icon.png"        
     },
     "content": {
         "details": {
-            "path": "README.md"
+            "path": "overview.md"
         },
         "license": {
             "path": "license.md"
@@ -66,7 +65,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildtask"
+                "name": "buildtask/SlackNotification"
             }
         }
     ],
