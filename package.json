@@ -15,7 +15,7 @@
     "vsts",
     "notification"
   ],
-  "author": "Kasun Kodagoda <'kvkrusl@gmail.com'>",
+  "author": "Kasun Kodagoda",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kasunkv/slack-notification/issues"
