@@ -4,7 +4,10 @@
   "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
   "main": "slacknotification.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "npm install",
+    "build": "tsc buildtask\\SlackNotification\\slacknotification.ts --lib ES2015",
+    "publish": "tfx extension publish --manifest-globs vss-extension.json"
   },
   "repository": {
     "type": "git",
@@ -15,7 +18,7 @@
     "vsts",
     "notification"
   ],
-  "author": "Kasun Kodagoda",
+  "author": "Kasun Kodagoda <'kvkrusl@gmail.com'>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kasunkv/slack-notification/issues"
