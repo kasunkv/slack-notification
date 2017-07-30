@@ -2,11 +2,11 @@
   "name": "slack-notification",
   "version": "1.0.0",
   "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
-  "main": "slacknotification.js",
+  "main": "buildtask/SlackNotification/slacknotification.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "npm install",
-    "build": "tsc slacknotification.ts --lib ES2015",
+    "build": "tsc /buildtask/SlackNotification/slacknotification.ts --lib ES2015",
     "publish": "tfx extension publish --manifest-globs vss-extension.json"
   },
   "repository": {
