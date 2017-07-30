@@ -5,7 +5,6 @@
   "main": "slacknotification.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "npm install",
     "build": "tsc slacknotification.ts --lib ES2015",
     "publish": "tfx extension publish --manifest-globs vss-extension.json"
   },
