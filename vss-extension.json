@@ -9,7 +9,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
+    "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services. The task includes the ability to send optional attachments with the standard slack massages",
     "categories": [
         "Build and release"
     ],
