@@ -26,15 +26,15 @@
     "minimumAgentVersion": "1.92.0",
     "groups": [
         {
-            "name": "attachment",
-            "displayName": "Attachment Options",
-            "isExpanded": false
-        },
-        {
             "name": "notification",
             "displayName": "Send Slack Notification",
             "isExpanded": true
-        }
+        },
+        {
+            "name": "attachment",
+            "displayName": "Attachment Options",
+            "isExpanded": false
+        }        
     ],
     "inputs": [
         {
