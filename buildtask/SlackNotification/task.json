@@ -125,7 +125,7 @@
             "label": "Attachment Text",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "This is the main text in a message attachment, and can contain (Standard Slack Message Markup)[https://api.slack.com/docs/message-formatting]"
+            "helpMarkDown": "This is the main text in a message attachment, and can contain [Standard Slack Message Markup](https://api.slack.com/docs/message-formatting)."
         },
         {
             "name": "Color",
