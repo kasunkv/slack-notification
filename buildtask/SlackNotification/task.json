@@ -20,7 +20,9 @@
         "Minor": 0,
         "Patch": 0
     },
-    "demands": [],
+    "demands": [
+        "npm"
+    ],
     "minimumAgentVersion": "1.92.0",
     "groups": [
         {
