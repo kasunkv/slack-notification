@@ -93,7 +93,7 @@
             "label": "Author Link",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL that will hyperlink the _Author Name_ text mentioned above. Will only work if _Author Name_ is present."
+            "helpMarkDown": "A valid URL that will hyperlink the *Author Name* text mentioned above. Will only work if *Author Name* is present."
         },
         {
             "name": "Title",
@@ -101,7 +101,7 @@
             "label": "Title",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "The _Title_ is displayed as larger, bold text near the top of a message attachment."
+            "helpMarkDown": "The *Title* is displayed as larger, bold text near the top of a message attachment."
         },
         {
             "name": "TitleLink",
@@ -109,7 +109,7 @@
             "label": "Title Link",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL will hyperlink the _Text_ mentioned above."
+            "helpMarkDown": "A valid URL will hyperlink the *Text* mentioned above."
         },
         {
             "name": "PreText",
@@ -133,7 +133,7 @@
             "label": "Border Color",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "Color of the border along the left side of the message attachment. Value that can either be one of _good_, _warning_, _danger_, or any _hex color code_ (eg. #439FE0)"
+            "helpMarkDown": "Color of the border along the left side of the message attachment. Value that can either be one of *good*, *warning*, *danger*, or any *hex color code* (eg. #439FE0)"
         },
         {
             "name": "ImageUrl",
@@ -141,7 +141,7 @@
             "label": "Image URL",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL to an image file that will be displayed inside a message attachment. Supports _gif_, _jpeg_, _png_, & _bmp_ formats."
+            "helpMarkDown": "A valid URL to an image file that will be displayed inside a message attachment. Supports *gif*, *jpeg*, *png*, & *bmp* formats."
         },
         {
             "name": "FooterText",
