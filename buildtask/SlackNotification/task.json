@@ -34,7 +34,7 @@
             "name": "attachment",
             "displayName": "Attachment Options",
             "isExpanded": false
-        }        
+        }
     ],
     "inputs": [
         {
@@ -51,7 +51,7 @@
             "type": "string",
             "label": "Channel",
             "required": true,
-            "defaultValue": "#general",
+            "defaultValue": "",
             "groupName": "notification",
             "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
         },
