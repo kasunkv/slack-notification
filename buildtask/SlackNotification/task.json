@@ -51,7 +51,7 @@
             "type": "string",
             "label": "Channel",
             "required": true,
-            "defaultValue": "#mychannelname",
+            "defaultValue": "",
             "groupName": "notification",
             "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
         },
