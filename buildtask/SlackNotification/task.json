@@ -17,8 +17,8 @@
     "author": "Kasun Kodagoda",
     "version": {
         "Major": 2,
-        "Minor": 0,
-        "Patch": 2
+        "Minor": 4,
+        "Patch": 0
     },
     "demands": [
         "npm"

@@ -22,12 +22,28 @@ async function run(): Promise<string> {
 
                 case NotificationType.CHAT_MESSAGE:
                     const chatMessage = container.get<ISlackChatMessage>(TYPES.ISlackChatMessage);
-                    await chatMessage.send();                    
+                    await chatMessage.send()
+                            .then((res: string) => {
+                                resolve(res);
+                            }, err => {
+                                reject(err);
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
                     break;
 
                 case NotificationType.FILE_UPLOAD:
                     const fileUpload = container.get<ISlackFileUpload>(TYPES.ISlackFileUpload);
-                    await fileUpload.upload();
+                    await fileUpload.upload()
+                            .then((res: string) => {
+                                resolve(res);
+                            }, err => {
+                                reject(err);
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
                     break;
             
                 default:
@@ -44,8 +60,11 @@ async function run(): Promise<string> {
 
 run()
     .then((res: string) => {
+        console.log(res);
         Task.setResult(Task.TaskResult.Succeeded, res);
     })
     .catch((err: any) => {
-        Task.setResult(Task.TaskResult.Failed, `Task Failed. Error: ${JSON.stringify(err)}`);
+        const msg = `Task Failed. Error: ${JSON.stringify(err)}`;
+        console.log(msg);
+        Task.setResult(Task.TaskResult.Failed, msg);
     });

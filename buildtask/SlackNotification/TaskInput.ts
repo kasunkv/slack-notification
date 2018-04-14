@@ -190,7 +190,29 @@ export class TaskInput implements ITaskInput {
     }
 
     public toJSON(): string {
-        return 'TODO';
+        const obj: object = {
+            slackApiToken : '****************',
+            messageAuthor : this._messageAuthor,
+            channel : this._channel,
+            uploadFilePath : this._uploadFilePath,
+            message : this._message,
+            iconUrl : this._iconUrl,
+            authorName : this._authorName,
+            authorLink : this._authorLink,
+            title : this._title,
+            titleLink : this._titleLink,
+            preText : this._preText,
+            text : this._text,
+            color : this._color,
+            imageUrl : this._imageUrl,
+            footerText : this._footerText,
+            footerIcon : this._footerIcon,
+            notificationType : this._notificationType,
+            fileTitle : this._fileTitle,
+            fileComment : this._fileComment
+        };
+
+        return JSON.stringify(obj);
     }
     
 }
