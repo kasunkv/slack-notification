@@ -14,5 +14,12 @@ export interface ITaskInput {
     Color: string;
     ImageUrl: string;
     FooterText: string;
-    FooterIcon: string;   
+    FooterIcon: string;
+
+    NotificationType: string;
+    UploadFilePath: string;
+    FileTitle: string;
+    FileComment: string;
+
+    TimeTicks: string;
 }

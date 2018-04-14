@@ -1,8 +1,9 @@
 import * as Task from 'vsts-task-lib';
 import { ITaskInput } from './interfaces/ITaskInput';
+import { injectable } from 'inversify';
 
-
-class TaskInput implements ITaskInput {
+@injectable()
+export class TaskInput implements ITaskInput {
     private _messageAuthor: string;
     private _channel: string;
     private _message: string;
@@ -18,15 +19,20 @@ class TaskInput implements ITaskInput {
     private _imageUrl: string;
     private _footerText: string;
     private _footerIcon: string;
+    private _notificationType: string;
+    private _uploadFilePath: string;
+    private _fileTitle: string;
+    private _fileComment: string;
 
     constructor() {
         // Required Inputs
         this._messageAuthor = Task.getInput('MessageAuthor', true);
         this._channel = Task.getInput('Channel', true);
-        this._message = Task.getInput('Message', true);
         this._slackApiToken = Task.getInput('SlackApiToken', true);
+        this._uploadFilePath = Task.getInput('UploadFilePath');
 
         // Optional Inputs
+        this._message = Task.getInput('Message');
         this._iconUrl = Task.getInput('IconUrl');
         this._authorName = Task.getInput('AuthorName');
         this._authorLink = Task.getInput('AuthorLink');
@@ -38,87 +44,90 @@ class TaskInput implements ITaskInput {
         this._imageUrl = Task.getInput('ImageUrl');
         this._footerText = Task.getInput('FooterText');
         this._footerIcon = Task.getInput('FooterIcon');
+        this._notificationType = Task.getInput('NotificationType');
+        this._fileTitle = Task.getInput('FileTitle');
+        this._fileComment = Task.getInput('FileComment');
     }
 
     get MessageAuthor(): string {
-        if(this._messageAuthor) {
+        if (this._messageAuthor) {
             return this._messageAuthor;
         }
         throw new Error('The Message Author is Required');
     }
 
     get Channel(): string {
-        if(this._channel) {
+        if (this._channel) {
             return this._channel;
         }
         throw new Error('The Slack Channel Name is Required');
     }
 
     get Message(): string {
-        if(this._message) {
+        if (this._message) {
             return this._message;
         }
         return '';
     }
 
     get SlackApiToken(): string {
-        if(this._slackApiToken) {
+        if (this._slackApiToken) {
             return this._slackApiToken;
         }
         throw new Error('The Slack API Key is Required');
     }
 
     get IconUrl(): string {
-        if(this._iconUrl) {
+        if (this._iconUrl) {
             return this._iconUrl;
         }
         return '';
     }
 
     get AuthorName(): string {
-        if(this._authorName) {
+        if (this._authorName) {
             return this._authorName;
         }
         return '';
     }
     
     get AuthorLink(): string {
-        if(this._authorLink) {
+        if (this._authorLink) {
             return this._authorLink;
         }
         return '';        
     }
     
     get Title(): string {
-        if(this._title) {
+        if (this._title) {
             return this._title;
         }
         return '';
     }
 
     get TitleLink(): string {
-        if(this._titleLink) {
+        if (this._titleLink) {
             return this._titleLink;
         }
         return '';
     }
 
     get PreText(): string {
-        if(this._preText) {
+        if (this._preText) {
             return this._preText;
         }
         return '';
     }
 
     get Text(): string {
-        if(this._text) {
+        if (this._text) {
             return this._text;
         }
         return '';
     }
 
     get Color(): string {
-        if(this._color) {
+        if (this._color) {
             return this._color;
         }
         return '';
@@ -126,24 +135,58 @@ class TaskInput implements ITaskInput {
     }
     
     get ImageUrl(): string {
-        if(this._imageUrl) {
+        if (this._imageUrl) {
             return this._imageUrl;
         }
         return '';
     }
 
     get FooterText(): string {
-        if(this._footerText) {
+        if (this._footerText) {
             return this._footerText;
         }
         return '';
     }
 
     get FooterIcon(): string {
-        if(this._footerIcon) {
+        if (this._footerIcon) {
             return this._footerIcon;
         }
         return '';
+    }
+
+    get NotificationType(): string {
+        if (this._notificationType) {
+            return this._notificationType;
+        }
+        return 'ChatMessage';
+    }
+
+    get UploadFilePath(): string {
+        if (this._uploadFilePath) {
+            return this._uploadFilePath;
+        }
+        throw new Error('The Path to the File to Upload is Required');
+    }
+
+    get FileTitle(): string {
+        if (this._fileTitle) {
+            return this._fileTitle;
+        }
+        return '';
+    }
+
+    get FileComment(): string {
+        if (this._fileComment) {
+            return this._fileComment;
+        }
+        return '';
+    }
+
+    get TimeTicks(): string {
+        const timeString: string = new Date().getTime().toString();
+        const timeTicks: string = timeString.substring(0, timeString.length - 3);
+        return timeTicks;
     }
     
 }

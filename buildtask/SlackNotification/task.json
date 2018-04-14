@@ -38,6 +38,27 @@
     ],
     "inputs": [
         {
+            "name": "SlackApiToken",
+            "type": "string",
+            "label": "Slack API Token",
+            "required": true,
+            "groupName": "notification",
+            "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
+        },
+        {
+            "name": "NotificationType",
+            "type": "pickList",
+            "label": "Notification Type",
+            "defaultValue": "ChatMessage",
+            "required": true,
+            "options": {
+                "ChatMessage": "Chat Message",
+                "UploadFile": "Upload File"
+            },
+            "groupName": "notification",
+            "helpMarkDown": "Select the type of notification. Use _Chat Message_ to send a message to a slack Channel. Use _Upload File_ to upload a file to a slack channel"
+        },
+        {
             "name": "MessageAuthor",
             "type": "string",
             "label": "Message Author",
@@ -45,6 +66,14 @@
             "defaultValue": "Visual Studio Team Services",
             "groupName": "notification",
             "helpMarkDown": "Text shown as the author of the message in Slack."
+        },
+        {
+            "name": "IconUrl",
+            "type": "string",
+            "label": "Icon URL",
+            "required": false,
+            "groupName": "notification",
+            "helpMarkDown": "The icon that will be shown along side the message."
         },
         {
             "name": "Channel",
@@ -59,33 +88,19 @@
             "name": "Message",
             "type": "multiLine",
             "label": "Message",
-            "required": true,
-            "groupName": "notification",
-            "helpMarkDown": "Message that needs to be posted to Slack channel or user. [Message Formatting](https://api.slack.com/docs/messages)"
-        },
-        {
-            "name": "SlackApiToken",
-            "type": "string",
-            "label": "Slack API Token",
-            "required": true,
-            "groupName": "notification",
-            "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
-        },
-        {
-            "name": "IconUrl",
-            "type": "string",
-            "label": "Icon URL",
             "required": false,
             "groupName": "notification",
-            "helpMarkDown": "The icon that will be shown along side the message."
-        },
+            "helpMarkDown": "Message that needs to be posted to Slack channel or user. [Message Formatting](https://api.slack.com/docs/messages)",
+            "visibleRule": "NotificationType = ChatMessage"
+        },        
         {
             "name": "AuthorName",
             "type": "string",
             "label": "Author Name",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "Small text used to display the author's name."
+            "helpMarkDown": "Small text used to display the author's name.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "AuthorLink",
@@ -93,7 +108,8 @@
             "label": "Author Link",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL that will hyperlink the *Author Name* text mentioned above. Will only work if *Author Name* is present."
+            "helpMarkDown": "A valid URL that will hyperlink the *Author Name* text mentioned above. Will only work if *Author Name* is present.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "Title",
@@ -101,7 +117,8 @@
             "label": "Title",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "The *Title* is displayed as larger, bold text near the top of a message attachment."
+            "helpMarkDown": "The *Title* is displayed as larger, bold text near the top of a message attachment.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "TitleLink",
@@ -109,7 +126,8 @@
             "label": "Title Link",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL will hyperlink the *Text* mentioned above."
+            "helpMarkDown": "A valid URL will hyperlink the *Text* mentioned above.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "PreText",
@@ -117,7 +135,8 @@
             "label": "Attachment Pre-Text",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "This is optional text that appears above the message attachment block."
+            "helpMarkDown": "This is optional text that appears above the message attachment block.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "Text",
@@ -125,7 +144,8 @@
             "label": "Attachment Text",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "This is the main text in a message attachment, and can contain [Standard Slack Message Markup](https://api.slack.com/docs/message-formatting)."
+            "helpMarkDown": "This is the main text in a message attachment, and can contain [Standard Slack Message Markup](https://api.slack.com/docs/message-formatting).",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "Color",
@@ -133,7 +153,8 @@
             "label": "Border Color",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "Color of the border along the left side of the message attachment. Value that can either be one of *good*, *warning*, *danger*, or any *hex color code* (eg. #439FE0)"
+            "helpMarkDown": "Color of the border along the left side of the message attachment. Value that can either be one of *good*, *warning*, *danger*, or any *hex color code* (eg. #439FE0)",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "ImageUrl",
@@ -141,7 +162,8 @@
             "label": "Image URL",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "A valid URL to an image file that will be displayed inside a message attachment. Supports *gif*, *jpeg*, *png*, & *bmp* formats."
+            "helpMarkDown": "A valid URL to an image file that will be displayed inside a message attachment. Supports *gif*, *jpeg*, *png*, & *bmp* formats.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "FooterText",
@@ -149,7 +171,8 @@
             "label": "Footer Text",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "Contextualize footer text for the attachment. Limited to 300 characters."
+            "helpMarkDown": "Contextualize footer text for the attachment. Limited to 300 characters.",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "FooterIcon",
@@ -157,7 +180,36 @@
             "label": "Footer Icon",
             "required": false,
             "groupName": "attachment",
-            "helpMarkDown": "Publicly accessible URL string that render a small icon beside your footer text."
+            "helpMarkDown": "Publicly accessible URL string that render a small icon beside your footer text.",
+            "visibleRule": "NotificationType = ChatMessage"
+        },
+        {
+            "name": "UploadFilePath",
+            "type": "filePath",
+            "label": "File to Upload",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Select the file to upload to slack channel.",
+            "visibleRule": "NotificationType = UploadFile",
+            "groupName": "attachment"
+        },
+        {
+            "name": "FileTitle",
+            "type": "string",
+            "label": "File Title",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Title of the file",
+            "visibleRule": "NotificationType = UploadFile"
+        },
+        {
+            "name": "FileComment",
+            "type": "string",
+            "label": "Comment",
+            "required": false,
+            "groupName": "attachment",
+            "helpMarkDown": "Initial comment to add to the file.",
+            "visibleRule": "NotificationType = UploadFile"
         }
     ],
     "instanceNameFormat": "Post Slack Notification",
