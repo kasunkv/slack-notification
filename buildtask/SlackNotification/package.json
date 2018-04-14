@@ -31,6 +31,9 @@
   "devDependencies": {
     "@types/node": "^8.0.17",
     "@types/q": "^1.0.3",
-    "@types/request": "^2.0.0"
+    "@types/request": "^2.0.0",
+    "tslint": "^5.9.1",
+    "tslint-eslint-rules": "^5.1.0",
+    "tslint-microsoft-contrib": "^5.0.3"
   }
 }
