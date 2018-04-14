@@ -1,4 +1,5 @@
 import { Container } from 'inversify';
+import 'reflect-metadata';
 
 import { ITaskInput } from '../interfaces/ITaskInput';
 import { ISlackClient } from '../interfaces/ISlackClient';
