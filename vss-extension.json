@@ -81,7 +81,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildtask/SlackNotification"
+                "name": "dist/buildtask/SlackNotification"
             }
         }
     ],
