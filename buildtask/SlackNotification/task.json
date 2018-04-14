@@ -17,7 +17,7 @@
     "author": "Kasun Kodagoda",
     "version": {
         "Major": 2,
-        "Minor": 4,
+        "Minor": 6,
         "Patch": 0
     },
     "demands": [
@@ -55,14 +55,6 @@
             "helpMarkDown": "Text shown as the author of the message in Slack."
         },
         {
-            "name": "IconUrl",
-            "type": "string",
-            "label": "Icon URL",
-            "required": false,
-            "groupName": "slackConfig",
-            "helpMarkDown": "The icon that will be shown along side the message."
-        },
-        {
             "name": "Channel",
             "type": "string",
             "label": "Channel",
@@ -70,7 +62,15 @@
             "defaultValue": "",
             "groupName": "slackConfig",
             "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
-        },        
+        },
+        {
+            "name": "IconUrl",
+            "type": "string",
+            "label": "Icon URL",
+            "required": false,
+            "groupName": "slackConfig",
+            "helpMarkDown": "The icon that will be shown along side the message."
+        },       
         {
             "name": "NotificationType",
             "type": "pickList",
