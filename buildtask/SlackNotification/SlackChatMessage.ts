@@ -1,4 +1,4 @@
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { WebClient, WebAPICallResult } from '@slack/client/dist';
 
 import TYPES from './types';
@@ -7,6 +7,7 @@ import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
 
+@injectable()
 export class SlackChatMessage implements ISlackChatMessage {
 
     private _taskInput: ITaskInput;

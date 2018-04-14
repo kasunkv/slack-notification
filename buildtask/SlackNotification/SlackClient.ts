@@ -1,11 +1,11 @@
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { WebClient } from '@slack/client';
 
 import TYPES from './types';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ITaskInput } from './interfaces/ITaskInput';
 
-
+@injectable()
 export class SlackClient implements ISlackClient {
 
     private _client: WebClient;
