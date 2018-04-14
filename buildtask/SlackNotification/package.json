@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/kasunkv/slack-notification#readme",
   "dependencies": {
+    "@slack/client": "^4.1.0",
     "request": "^2.81.0",
-    "vsts-task-lib": "^2.0.6"
+    "vsts-task-lib": "^2.4.0"
   },
   "devDependencies": {
     "@types/node": "^8.0.17",
