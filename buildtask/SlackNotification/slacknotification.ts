@@ -1,77 +1,70 @@
-import task = require('vsts-task-lib/task');
-import request = require('request');
-import path = require('path');
+import * as Task from 'vsts-task-lib';
+import * as path from 'path';
 
-task.setResourcePath(path.join(__dirname, 'task.json'));
+import container from './di/inversify.config';
+import TYPES from './di/types';
 
-async function run() {
-    const slackApiBase = 'https://slack.com/api/chat.postMessage';
+import { ITaskInput } from './interfaces/ITaskInput';
+import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
+import { ISlackFileUpload } from './interfaces/ISlackFileUpload';
+import { NotificationType } from './Constants';
 
-    // Required Inputs
-    let messageAuthor: string = task.getInput('MessageAuthor', true);
-    let channel: string = task.getInput('Channel', true);
-    let message: string = task.getInput('Message', true);
-    let slackApiToken: string = task.getInput('SlackApiToken', true);
+Task.setResourcePath(path.join(__dirname, 'task.json'));
 
-    // Optional Inputs
-    let iconUrl: string = task.getInput('IconUrl');
-    let authorName: string = task.getInput('AuthorName');
-    let authorLink: string = task.getInput('AuthorLink');
-    let title: string = task.getInput('Title');
-    let titleLink: string = task.getInput('TitleLink');
-    let preText: string = task.getInput('PreText');
-    let text: string = task.getInput('Text');
-    let color: string = task.getInput('Color');
-    let imageUrl: string = task.getInput('ImageUrl');
-    let footerText: string = task.getInput('FooterText');
-    let footerIcon: string = task.getInput('FooterIcon');
+async function run(): Promise<string> {
+    const promise = new Promise<string>(async (resolve, reject) => {
+        try {
+            
+            const taskInput = container.get<ITaskInput>(TYPES.ITaskInput);
+            Task.debug(taskInput.toJSON());
 
-    let timeString: string = new Date().getTime().toString();
-    let timeTicks: string = timeString.substring(0, timeString.length - 3);
+            switch (taskInput.NotificationType) {
 
-    let attachment: object = {
-        "title": title,
-        "title_link": titleLink,
-        "author_name": authorName,
-        "author_link": authorLink,
-        "pretext": preText,
-        "text": text,
-        "mrkdwn_in": ["text", "pretext"],
-        "color": color,
-        "image_url": imageUrl,
-        "footer": footerText,
-        "footer_icon": footerIcon,
-        "ts": timeTicks
-    };
+                case NotificationType.CHAT_MESSAGE:
+                    const chatMessage = container.get<ISlackChatMessage>(TYPES.ISlackChatMessage);
+                    await chatMessage.send()
+                            .then((res: string) => {
+                                resolve(res);
+                            }, err => {
+                                reject(err);
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
+                    break;
 
-    let attachmentList: Array<object> = [attachment];
-    let attachmentListString = JSON.stringify(attachmentList);
+                case NotificationType.FILE_UPLOAD:
+                    const fileUpload = container.get<ISlackFileUpload>(TYPES.ISlackFileUpload);
+                    await fileUpload.upload()
+                            .then((res: string) => {
+                                resolve(res);
+                            }, err => {
+                                reject(err);
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
+                    break;
+            
+                default:
+                    break;
+            }
 
-    task.debug(attachmentListString);
+        } catch (err) {
+            reject(err.message || err);
+        }
+    });
 
-    let slackMessageBody: object = {
-        "token": slackApiToken,
-        "channel": channel,
-        "text": message,
-        "icon_url": iconUrl,
-        "username": messageAuthor,
-        "unfurl_links": true, 
-        "attachments": attachmentListString,        
-        "pretty": 1
-    };
-
-    task.debug(JSON.stringify(slackMessageBody));
-    
-    request
-        .post(slackApiBase)
-        .form(slackMessageBody)
-        .on('response', (response) => {
-            task.debug('Slack message posted successfully.');            
-        })
-        .on('error', () => {
-            task.error('Posting slack message failed');
-            throw new Error('Failed to post slack message');
-        });
+    return promise;
 }
 
-run();
+run()
+    .then((res: string) => {
+        console.log(res);
+        Task.setResult(Task.TaskResult.Succeeded, res);
+    })
+    .catch((err: any) => {
+        const msg = `Task Failed. Error: ${JSON.stringify(err)}`;
+        console.log(msg);
+        Task.setResult(Task.TaskResult.Failed, msg);
+    });
