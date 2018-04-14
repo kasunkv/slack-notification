@@ -26,8 +26,8 @@
     "minimumAgentVersion": "1.92.0",
     "groups": [
         {
-            "name": "notification",
-            "displayName": "Send Slack Notification",
+            "name": "slackConfig",
+            "displayName": "Slack Configuration",
             "isExpanded": true
         },
         {
@@ -42,9 +42,35 @@
             "type": "string",
             "label": "Slack API Token",
             "required": true,
-            "groupName": "notification",
+            "groupName": "slackConfig",
             "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
+        },        
+        {
+            "name": "MessageAuthor",
+            "type": "string",
+            "label": "Message Author",
+            "required": true,
+            "defaultValue": "Visual Studio Team Services",
+            "groupName": "slackConfig",
+            "helpMarkDown": "Text shown as the author of the message in Slack."
         },
+        {
+            "name": "IconUrl",
+            "type": "string",
+            "label": "Icon URL",
+            "required": false,
+            "groupName": "slackConfig",
+            "helpMarkDown": "The icon that will be shown along side the message."
+        },
+        {
+            "name": "Channel",
+            "type": "string",
+            "label": "Channel",
+            "required": true,
+            "defaultValue": "",
+            "groupName": "slackConfig",
+            "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
+        },        
         {
             "name": "NotificationType",
             "type": "pickList",
@@ -55,44 +81,18 @@
                 "ChatMessage": "Chat Message",
                 "UploadFile": "Upload File"
             },
-            "groupName": "notification",
+            "groupName": "attachment",
             "helpMarkDown": "Select the type of notification. Use _Chat Message_ to send a message to a slack Channel. Use _Upload File_ to upload a file to a slack channel"
-        },
-        {
-            "name": "MessageAuthor",
-            "type": "string",
-            "label": "Message Author",
-            "required": true,
-            "defaultValue": "Visual Studio Team Services",
-            "groupName": "notification",
-            "helpMarkDown": "Text shown as the author of the message in Slack."
-        },
-        {
-            "name": "IconUrl",
-            "type": "string",
-            "label": "Icon URL",
-            "required": false,
-            "groupName": "notification",
-            "helpMarkDown": "The icon that will be shown along side the message."
-        },
-        {
-            "name": "Channel",
-            "type": "string",
-            "label": "Channel",
-            "required": true,
-            "defaultValue": "",
-            "groupName": "notification",
-            "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
         },
         {
             "name": "Message",
             "type": "multiLine",
             "label": "Message",
             "required": false,
-            "groupName": "notification",
+            "groupName": "attachment",
             "helpMarkDown": "Message that needs to be posted to Slack channel or user. [Message Formatting](https://api.slack.com/docs/messages)",
             "visibleRule": "NotificationType = ChatMessage"
-        },        
+        },
         {
             "name": "AuthorName",
             "type": "string",
