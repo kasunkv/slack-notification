@@ -12,7 +12,7 @@ import { NotificationType } from './Constants';
 Task.setResourcePath(path.join(__dirname, 'task.json'));
 
 async function run(): Promise<string> {
-    const promise = new Promise<string>((resolve, reject) => {
+    const promise = new Promise<string>(async (resolve, reject) => {
         try {
             
             const taskInput = container.get<ITaskInput>(TYPES.ITaskInput);
@@ -22,12 +22,12 @@ async function run(): Promise<string> {
 
                 case NotificationType.CHAT_MESSAGE:
                     const chatMessage = container.get<ISlackChatMessage>(TYPES.ISlackChatMessage);
-                    chatMessage.send();
-                    
+                    await chatMessage.send();                    
                     break;
+
                 case NotificationType.FILE_UPLOAD:
                     const fileUpload = container.get<ISlackFileUpload>(TYPES.ISlackFileUpload);
-                    fileUpload.upload();
+                    await fileUpload.upload();
                     break;
             
                 default:
