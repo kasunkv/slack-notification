@@ -188,5 +188,9 @@ export class TaskInput implements ITaskInput {
         const timeTicks: string = timeString.substring(0, timeString.length - 3);
         return timeTicks;
     }
+
+    public toJSON(): string {
+        return 'TODO';
+    }
     
 }

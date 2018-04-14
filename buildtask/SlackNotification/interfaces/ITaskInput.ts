@@ -22,4 +22,6 @@ export interface ITaskInput {
     FileComment: string;
 
     TimeTicks: string;
+
+    toJSON(): string;
 }
