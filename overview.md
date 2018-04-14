@@ -45,7 +45,7 @@ Slack Notification task provides support for sending attachments along with the 
  * **Footer Text**: _(Optional)_ Contextualize footer text for the attachment. Limited to 300 characters.
  * **Footer Icon**: _(Optional)_ Publicly accessible URL string that render a small icon beside your footer text.
 
- ![Sending Chat Message](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-send-chat-message.png)
+ ![Sending Chat Message](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-send-chat-message.PNG)
 
 
  #### Notification Type: Upload File
@@ -54,7 +54,7 @@ Slack Notification task provides support for sending attachments along with the 
  * **File Title**: _(Optional)_ Set the title of the file.
  * **Comment**: _(Optional)_ Set the initial comment for the uploaded file.
 
- ![Uploading a File](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-upload-file.png)
+ ![Uploading a File](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-upload-file.PNG)
 
 
  ## Sample Slack Message
