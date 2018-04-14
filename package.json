@@ -4,9 +4,22 @@
   "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services",
   "main": "slacknotification.js",
   "scripts": {
+    "clean": "rimraf dist && npm run clean-js && npm run clean-map",
+    "clean-js": "rimraf buildtask/**/*.js",
+    "clean-map": "rimraf buildtask/**/*.map",
+
+    "lint": "tslint -c tslint.json buildtask\\SlackNotification\\**\\*.ts",
+    "compile": "npm run lint && tsc --project ./buildtask",
+    "build": "npm run move-npm && npm run restore-prod && npm run lint && npm run compile && npm run move-task",
+    
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc slacknotification.ts --lib ES2015",
-    "publish": "tfx extension publish --manifest-globs vss-extension.json"
+    
+    "move-npm": "mkdirp dist/buildtask/SlackNotification && copyfiles \"./package.json\" dist/buildtask/SlackNotification",
+    "move-task": "copyfiles \"./buildtask/SlackNotification/**/!(*.ts)\" dist",
+    "restore-prod": "pushd \"dist/buildtask/SlackNotification\" && npm install --only=production && popd",
+    
+    "publish": "tfx extension publish --manifest-globs vss-extension.json",
+    "publish-local": "tfx build tasks upload --task-path ./dist/buildtask/SlackNotification"
   },
   "repository": {
     "type": "git",
@@ -33,6 +46,8 @@
     "@types/node": "^8.0.17",
     "@types/q": "^1.0.3",
     "@types/request": "^2.0.0",
+    "copyfiles": "^2.0.0",
+    "rimraf": "^2.6.2",
     "tslint": "^5.9.1",
     "tslint-eslint-rules": "^5.1.0",
     "tslint-microsoft-contrib": "^5.0.3",
