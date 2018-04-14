@@ -2,3 +2,5 @@ node_modules/
 *.js
 *.vsix
 *.log
+*.map
+.vscode/
