@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { inject, injectable } from 'inversify';
 import { WebClient, WebAPICallResult } from '@slack/client/dist';
 
-import TYPES from './types';
+import TYPES from './di/types';
 
 import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';

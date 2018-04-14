@@ -1,8 +1,8 @@
 import * as Task from 'vsts-task-lib';
 import * as path from 'path';
 
-import container from './inversify.config';
-import TYPES from './types';
+import container from './di/inversify.config';
+import TYPES from './di/types';
 
 import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';

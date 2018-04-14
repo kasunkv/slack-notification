@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { WebClient } from '@slack/client';
 
-import TYPES from './types';
+import TYPES from './di/types';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ITaskInput } from './interfaces/ITaskInput';
 

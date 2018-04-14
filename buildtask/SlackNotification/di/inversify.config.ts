@@ -1,16 +1,16 @@
 import { Container } from 'inversify';
 
-import { ITaskInput } from './interfaces/ITaskInput';
-import { ISlackClient } from './interfaces/ISlackClient';
-import { ISlackFileUpload } from './interfaces/ISlackFileUpload';
-import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
+import { ITaskInput } from '../interfaces/ITaskInput';
+import { ISlackClient } from '../interfaces/ISlackClient';
+import { ISlackFileUpload } from '../interfaces/ISlackFileUpload';
+import { ISlackChatMessage } from '../interfaces/ISlackChatMessage';
 
 import TYPES from './types';
 
-import { TaskInput } from './TaskInput';
-import { SlackClient } from './SlackClient';
-import { SlackFileUpload } from './SlackFileUpload';
-import { SlackChatMessage } from './SlackChatMessage';
+import { TaskInput } from '../TaskInput';
+import { SlackClient } from '../SlackClient';
+import { SlackFileUpload } from '../SlackFileUpload';
+import { SlackChatMessage } from '../SlackChatMessage';
 
 const container = new Container();
 
