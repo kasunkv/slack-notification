@@ -1,4 +1,4 @@
-![Visual Studio Team Services](https://kasunkodagoda.visualstudio.com/DefaultCollection/_apis/public/build/definitions/d98ebb73-adf9-4e0c-ba4e-bbf3d42d5af3/26/badge)
+![Visual Studio Team Services](https://kasunkodagoda.visualstudio.com/_apis/public/build/definitions/a6819d70-02f9-4711-8ff6-ae44bb52a8d1/28/badge)
 # Slack Notification Task for Visual Studio Team Services
 
 Slack Notification task with advanced slack message customization for Visual Studio Team Services. The task includes the ability to send optional attachments with the standard slack messages.
