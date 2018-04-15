@@ -26,26 +26,22 @@ export class SlackFileUpload implements ISlackFileUpload {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
 
-                await this._client.files.upload({
+                const result: WebAPICallResult = await this._client.files.upload({
                     channels: this._taskInput.Channel,
                     file: fs.createReadStream(this._taskInput.UploadFilePath),
                     filetype: 'auto',
                     title: this._taskInput.FileTitle,
                     initial_comment: this._taskInput.FileComment
-                })
-                .then((res: WebAPICallResult) => {
-                    if (res.ok) {
-                        resolve('File Uploaded Successfully.');
-                    } else {
-                        reject('File Upload Failed.');
-                    }
-                })
-                .catch(err => {
-                    reject(err.message || err);
                 });
+
+                if (result.ok) {
+                    resolve('File Uploaded Successfully.');
+                } else {
+                    reject(`File Upload Failed. Error: ${result.error}`);
+                }
                 
             } catch (err) {
-                reject(err);
+                reject(err.message || err);
             }
         });
         return promise;

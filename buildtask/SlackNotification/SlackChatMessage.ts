@@ -25,7 +25,7 @@ export class SlackChatMessage implements ISlackChatMessage {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
                 
-                await this._client.chat.postMessage({
+                const result: WebAPICallResult = await this._client.chat.postMessage({
                     channel: this._taskInput.Channel,
                     text: this._taskInput.Message,
                     icon_url: this._taskInput.IconUrl,
@@ -46,20 +46,16 @@ export class SlackChatMessage implements ISlackChatMessage {
                             ts: this._taskInput.TimeTicks
                         }
                     ]
-                })
-                .then((res: WebAPICallResult) => {
-                    if (res.ok) {
-                        resolve('Chat Message Posted Successfully.');
-                    } else {
-                        reject('Posting Chat Message Failed.');
-                    }
-                })
-                .catch((err: any) => {
-                    reject(err.message || err);
                 });
 
+                if (result.ok) {
+                    resolve('Chat Message Posted Successfully.');
+                } else {
+                    reject(`Posting Chat Message Failed. Error: ${result.error}`);
+                }                
+
             } catch (err) {
-                reject(err);
+                reject(err.message || err);
             }
         });
         return promise;

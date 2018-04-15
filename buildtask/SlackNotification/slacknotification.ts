@@ -22,28 +22,14 @@ async function run(): Promise<string> {
 
                 case NotificationType.CHAT_MESSAGE:
                     const chatMessage = container.get<ISlackChatMessage>(TYPES.ISlackChatMessage);
-                    await chatMessage.send()
-                            .then((res: string) => {
-                                resolve(res);
-                            }, err => {
-                                reject(err);
-                            })
-                            .catch(err => {
-                                reject(err);
-                            });
+                    const chatResult: string = await chatMessage.send();
+                    resolve(chatResult);
                     break;
 
                 case NotificationType.FILE_UPLOAD:
                     const fileUpload = container.get<ISlackFileUpload>(TYPES.ISlackFileUpload);
-                    await fileUpload.upload()
-                            .then((res: string) => {
-                                resolve(res);
-                            }, err => {
-                                reject(err);
-                            })
-                            .catch(err => {
-                                reject(err);
-                            });
+                    const uploadResult: string = await fileUpload.upload();
+                    resolve(uploadResult);
                     break;
             
                 default:
