@@ -24,7 +24,7 @@ export class SlackChatMessage implements ISlackChatMessage {
     send(): Promise<string> {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
-                
+
                 const result: WebAPICallResult = await this._client.chat.postMessage({
                     channel: this._taskInput.Channel,
                     text: this._taskInput.Message,
@@ -43,7 +43,7 @@ export class SlackChatMessage implements ISlackChatMessage {
                             image_url: this._taskInput.ImageUrl,
                             footer: this._taskInput.FooterText,
                             footer_icon: this._taskInput.FooterIcon,
-                            ts: this._taskInput.TimeTicks
+                            ts: this._taskInput.ShowFooterTimestamp ? this._taskInput.TimeTicks : ''
                         }
                     ]
                 });
@@ -52,7 +52,7 @@ export class SlackChatMessage implements ISlackChatMessage {
                     resolve('Chat Message Posted Successfully.');
                 } else {
                     reject(`Posting Chat Message Failed. Error: ${result.error}`);
-                }                
+                }
 
             } catch (err) {
                 reject(err.message || err);

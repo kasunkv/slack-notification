@@ -19,6 +19,7 @@ export class TaskInput implements ITaskInput {
     private _imageUrl: string;
     private _footerText: string;
     private _footerIcon: string;
+    private _showFooterTimestamp: boolean;
     private _notificationType: string;
     private _uploadFilePath: string;
     private _fileTitle: string;
@@ -44,6 +45,7 @@ export class TaskInput implements ITaskInput {
         this._imageUrl = Task.getInput('ImageUrl');
         this._footerText = Task.getInput('FooterText');
         this._footerIcon = Task.getInput('FooterIcon');
+        this._showFooterTimestamp = Task.getBoolInput('ShowFooterTimestamp');
         this._notificationType = Task.getInput('NotificationType');
         this._fileTitle = Task.getInput('FileTitle');
         this._fileComment = Task.getInput('FileComment');
@@ -90,14 +92,14 @@ export class TaskInput implements ITaskInput {
         }
         return '';
     }
-    
+
     get AuthorLink(): string {
         if (this._authorLink) {
             return this._authorLink;
         }
-        return '';        
+        return '';
     }
-    
+
     get Title(): string {
         if (this._title) {
             return this._title;
@@ -131,9 +133,9 @@ export class TaskInput implements ITaskInput {
             return this._color;
         }
         return '';
-        
+
     }
-    
+
     get ImageUrl(): string {
         if (this._imageUrl) {
             return this._imageUrl;
@@ -153,6 +155,10 @@ export class TaskInput implements ITaskInput {
             return this._footerIcon;
         }
         return '';
+    }
+
+    get ShowFooterTimestamp(): boolean {
+        return this._showFooterTimestamp;
     }
 
     get NotificationType(): string {
@@ -191,28 +197,29 @@ export class TaskInput implements ITaskInput {
 
     public toJSON(): string {
         const obj: object = {
-            slackApiToken : '****************',
-            messageAuthor : this._messageAuthor,
-            channel : this._channel,
-            uploadFilePath : this._uploadFilePath,
-            message : this._message,
-            iconUrl : this._iconUrl,
-            authorName : this._authorName,
-            authorLink : this._authorLink,
-            title : this._title,
-            titleLink : this._titleLink,
-            preText : this._preText,
-            text : this._text,
-            color : this._color,
-            imageUrl : this._imageUrl,
-            footerText : this._footerText,
-            footerIcon : this._footerIcon,
-            notificationType : this._notificationType,
-            fileTitle : this._fileTitle,
-            fileComment : this._fileComment
+            slackApiToken: '****************',
+            messageAuthor: this._messageAuthor,
+            channel: this._channel,
+            uploadFilePath: this._uploadFilePath,
+            message: this._message,
+            iconUrl: this._iconUrl,
+            authorName: this._authorName,
+            authorLink: this._authorLink,
+            title: this._title,
+            titleLink: this._titleLink,
+            preText: this._preText,
+            text: this._text,
+            color: this._color,
+            imageUrl: this._imageUrl,
+            footerText: this._footerText,
+            footerIcon: this._footerIcon,
+            showFooterTimestamp: this._showFooterTimestamp,
+            notificationType: this._notificationType,
+            fileTitle: this._fileTitle,
+            fileComment: this._fileComment
         };
 
         return JSON.stringify(obj);
     }
-    
+
 }

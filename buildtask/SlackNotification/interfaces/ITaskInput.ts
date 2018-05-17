@@ -15,6 +15,7 @@ export interface ITaskInput {
     ImageUrl: string;
     FooterText: string;
     FooterIcon: string;
+    ShowFooterTimestamp: boolean;
 
     NotificationType: string;
     UploadFilePath: string;

@@ -24,8 +24,7 @@
         "npm"
     ],
     "minimumAgentVersion": "1.92.0",
-    "groups": [
-        {
+    "groups": [{
             "name": "slackConfig",
             "displayName": "Slack Configuration",
             "isExpanded": true
@@ -36,15 +35,14 @@
             "isExpanded": true
         }
     ],
-    "inputs": [
-        {
+    "inputs": [{
             "name": "SlackApiToken",
             "type": "string",
             "label": "Slack API Token",
             "required": true,
             "groupName": "slackConfig",
             "helpMarkDown": "Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable."
-        },        
+        },
         {
             "name": "MessageAuthor",
             "type": "string",
@@ -70,7 +68,7 @@
             "required": false,
             "groupName": "slackConfig",
             "helpMarkDown": "The icon that will be shown along side the message."
-        },       
+        },
         {
             "name": "NotificationType",
             "type": "pickList",
@@ -94,7 +92,7 @@
             "visibleRule": "NotificationType = ChatMessage",
             "properties": {
                 "resizable": true,
-                "rows" : "10"
+                "rows": "10"
             }
         },
         {
@@ -152,7 +150,7 @@
             "visibleRule": "NotificationType = ChatMessage",
             "properties": {
                 "resizable": true,
-                "rows" : "10"
+                "rows": "10"
             }
         },
         {
@@ -174,6 +172,15 @@
             "visibleRule": "NotificationType = ChatMessage"
         },
         {
+            "name": "FooterIcon",
+            "type": "string",
+            "label": "Footer Icon",
+            "required": false,
+            "groupName": "notificationOptions",
+            "helpMarkDown": "Publicly accessible URL string that render a small icon beside your footer text.",
+            "visibleRule": "NotificationType = ChatMessage"
+        },
+        {
             "name": "FooterText",
             "type": "string",
             "label": "Footer Text",
@@ -183,12 +190,13 @@
             "visibleRule": "NotificationType = ChatMessage"
         },
         {
-            "name": "FooterIcon",
-            "type": "string",
-            "label": "Footer Icon",
+            "name": "ShowFooterTimestamp",
+            "type": "boolean",
+            "label": "Show Timestamp in the Footer",
             "required": false,
+            "defaultValue": true,
             "groupName": "notificationOptions",
-            "helpMarkDown": "Publicly accessible URL string that render a small icon beside your footer text.",
+            "helpMarkDown": "Select to show the current timestamp alongside the footer text",
             "visibleRule": "NotificationType = ChatMessage"
         },
         {
@@ -227,5 +235,5 @@
             "argumentFormat": ""
         }
     },
-    "messages": { }
+    "messages": {}
 }
