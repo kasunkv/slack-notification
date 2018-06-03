@@ -25,7 +25,8 @@ Send Slack Notification section contains some required configuration options.
 ### Required Configuration
  
  * **Message Author**: Text shown as the author of the message in Slack.
- * **Channel**: Channel or the User where the message is sent to. E.g. _#general, @kasunk_
+ * **Destination**: Select the Destination for the Slack Message. To send a message/upload file to a *Channel*, select _Slack Channel_. To send a direct message/upload file to a *User*, select _Slack User_.
+ * **Channel or User**: Channel/User where the message is sent to. This value is tied to the *Destination* input option. If you selected _Slack Channel_ as the Destination, you can enter the slack channel name here. You can either add the channel name with *#* prefix or without the prefix. _(E.g. #general, general)_. If you selected _Slack User_ as the Destination, You need to enter the *Real Name* of the Slack User without any prefix. _(E.g. John Smith, Halc Lewis)_. The real name is *Case Sensitive* so make sure to type it correctly. _If the Channel Name or User's Real Name is invalid, the task will finish without sending any notifications_.
  * **Slack API Token**: Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable.
  * **Icon URL**: _(Optional)_ The icon that will be shown along side the message.
 

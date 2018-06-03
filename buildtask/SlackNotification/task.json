@@ -63,16 +63,16 @@
                 "DirectMessage": "Slack User"
             },
             "groupName": "slackConfig",
-            "helpMarkDown": "Select the type of notification. Use _Chat Message_ to send a message to a slack Channel. Use _Upload File_ to upload a file to a slack channel"
+            "helpMarkDown": "Select the Destination for the Slack Message. To send a message/upload file to a *Channel*, select _Slack Channel_. To send a direct message/upload file to a *User*, select _Slack User_."
         },
         {
             "name": "Channel",
             "type": "string",
-            "label": "Channel",
+            "label": "Channel or User",
             "required": true,
             "defaultValue": "",
             "groupName": "slackConfig",
-            "helpMarkDown": "Channel/User where the message is sent to. E.g. #general, @kasunk"
+            "helpMarkDown": "Channel/User where the message is sent to. This value is tied to the *Destination* input option. If you selected _Slack Channel_ as the Destination, you can enter the slack channel name here. You can either add the channel name with *#* prefix or without the prefix. _(E.g. #general, general)._ If you selected _Slack User_ as the Destination, You need to enter the *Real Name* of the Slack User without any prefix. _(E.g. John Smith, Halc Lewis)._ The real name is *Case Sensitive* so make sure to type it correctly. If the Channel Name or User's Real Name is invalid, the task will finish without sending any notifications."
         },
         {
             "name": "IconUrl",
