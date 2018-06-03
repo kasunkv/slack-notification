@@ -1,3 +1,4 @@
+import { ISlackChannelService } from './../interfaces/ISlackChannelService';
 import { ISlackFileUpload } from '../interfaces/ISlackFileUpload';
 import { ISlackChatMessage } from '../interfaces/ISlackChatMessage';
 import { ISlackClient } from '../interfaces/ISlackClient';
@@ -7,7 +8,8 @@ const TYPES = {
     ITaskInput: Symbol('ITaskInput'),
     ISlackClient: Symbol('ISlackClient'),
     ISlackChatMessage: Symbol('ISlackChatMessage'),
-    ISlackFileUpload: Symbol('ISlackFileUpload')
+    ISlackFileUpload: Symbol('ISlackFileUpload'),
+    ISlackChannelService: Symbol('ISlackChannelService')
 };
 
 export default TYPES;
