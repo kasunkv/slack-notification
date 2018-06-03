@@ -1,10 +1,13 @@
 import * as Task from 'vsts-task-lib';
-import { ITaskInput } from './interfaces/ITaskInput';
 import { injectable } from 'inversify';
+
+import { ITaskInput } from './interfaces/ITaskInput';
+import { DestinationType } from './Constants';
 
 @injectable()
 export class TaskInput implements ITaskInput {
     private _messageAuthor: string;
+    private _destination: string;
     private _channel: string;
     private _message: string;
     private _slackApiToken: string;
@@ -28,6 +31,7 @@ export class TaskInput implements ITaskInput {
     constructor() {
         // Required Inputs
         this._messageAuthor = Task.getInput('MessageAuthor', true);
+        this._destination = Task.getInput('Destination', true);
         this._channel = Task.getInput('Channel', true);
         this._slackApiToken = Task.getInput('SlackApiToken', true);
         this._uploadFilePath = Task.getInput('UploadFilePath');
@@ -58,11 +62,18 @@ export class TaskInput implements ITaskInput {
         throw new Error('The Message Author is Required');
     }
 
+    get Destination(): string {
+        if (this._destination) {
+            return this._destination;
+        }
+        return DestinationType.CHANNEL;
+    }
+
     get Channel(): string {
         if (this._channel) {
-            return this._channel;
+            return this._channel.trim();
         }
-        throw new Error('The Slack Channel Name is Required');
+        throw new Error('The Slack Channel Name/User Real Name is Required');
     }
 
     get Message(): string {

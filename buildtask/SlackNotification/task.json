@@ -17,8 +17,8 @@
     "author": "Kasun Kodagoda",
     "version": {
         "Major": 2,
-        "Minor": 7,
-        "Patch": 0
+        "Minor": 8,
+        "Patch": 1
     },
     "demands": [
         "npm"
@@ -51,6 +51,19 @@
             "defaultValue": "Visual Studio Team Services",
             "groupName": "slackConfig",
             "helpMarkDown": "Text shown as the author of the message in Slack."
+        },
+        {
+            "name": "Destination",
+            "type": "pickList",
+            "label": "Message Destination",
+            "defaultValue": "Channel",
+            "required": true,
+            "options": {
+                "Channel": "Slack Channel",
+                "DirectMessage": "Slack User"
+            },
+            "groupName": "slackConfig",
+            "helpMarkDown": "Select the type of notification. Use _Chat Message_ to send a message to a slack Channel. Use _Upload File_ to upload a file to a slack channel"
         },
         {
             "name": "Channel",
