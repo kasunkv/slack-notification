@@ -6,27 +6,31 @@ import TYPES from './di/types';
 import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
+import { ISlackChannelService } from './interfaces/ISlackChannelService';
 
 @injectable()
 export class SlackChatMessage implements ISlackChatMessage {
 
     private _taskInput: ITaskInput;
     private _client: WebClient;
+    private _channelService: ISlackChannelService;
 
     constructor(
         @inject(TYPES.ISlackClient) slackClient: ISlackClient,
-        @inject(TYPES.ITaskInput) taskInput: ITaskInput
+        @inject(TYPES.ITaskInput) taskInput: ITaskInput,
+        @inject(TYPES.ISlackChannelService) slackChannelService: ISlackChannelService
     ) {
         this._client = slackClient.getInstance();
         this._taskInput = taskInput;
+        this._channelService = slackChannelService;
     }
 
     send(): Promise<string> {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
-
+                const channelId: string = await this._channelService.getChannelId();
                 const result: WebAPICallResult = await this._client.chat.postMessage({
-                    channel: this._taskInput.Channel,
+                    channel: channelId,
                     text: this._taskInput.Message,
                     icon_url: this._taskInput.IconUrl,
                     username: this._taskInput.MessageAuthor,
