@@ -219,6 +219,8 @@ export class TaskInput implements ITaskInput {
         const obj: object = {
             slackApiToken: '****************',
             messageAuthor: this._messageAuthor,
+            destination: this._destination,
+            userIdType: this._userIdType,
             channel: this._channel,
             uploadFilePath: this._uploadFilePath,
             message: this._message,
