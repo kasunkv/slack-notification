@@ -2,12 +2,13 @@ import * as Task from 'vsts-task-lib';
 import { injectable } from 'inversify';
 
 import { ITaskInput } from './interfaces/ITaskInput';
-import { DestinationType } from './Constants';
+import { DestinationType, UserIdType } from './Constants';
 
 @injectable()
 export class TaskInput implements ITaskInput {
     private _messageAuthor: string;
     private _destination: string;
+    private _userIdType: string;
     private _channel: string;
     private _message: string;
     private _slackApiToken: string;
@@ -36,7 +37,8 @@ export class TaskInput implements ITaskInput {
         this._slackApiToken = Task.getInput('SlackApiToken', true);
         this._uploadFilePath = Task.getInput('UploadFilePath');
 
-        // Optional Inputs
+        // Optional Inputs        
+        this._userIdType = Task.getInput('UserIdType');
         this._message = Task.getInput('Message');
         this._iconUrl = Task.getInput('IconUrl');
         this._authorName = Task.getInput('AuthorName');
@@ -67,6 +69,13 @@ export class TaskInput implements ITaskInput {
             return this._destination;
         }
         return DestinationType.CHANNEL;
+    }
+
+    get UserIdType(): string {
+        if (this._userIdType) {
+            return this._userIdType;
+        }
+        return UserIdType.NAME;
     }
 
     get Channel(): string {

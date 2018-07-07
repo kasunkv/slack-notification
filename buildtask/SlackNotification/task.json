@@ -11,8 +11,7 @@
         "Release"
     ],
     "runsOn": [
-        "Agent",
-        "DeploymentGroup"
+        "Agent"
     ],
     "author": "Kasun Kodagoda",
     "version": {
@@ -20,11 +19,10 @@
         "Minor": 8,
         "Patch": 1
     },
-    "demands": [
-        "npm"
-    ],
+    "demands": [],
     "minimumAgentVersion": "1.92.0",
-    "groups": [{
+    "groups": [
+        {
             "name": "slackConfig",
             "displayName": "Slack Configuration",
             "isExpanded": true
@@ -35,7 +33,8 @@
             "isExpanded": true
         }
     ],
-    "inputs": [{
+    "inputs": [
+        {
             "name": "SlackApiToken",
             "type": "string",
             "label": "Slack API Token",
@@ -63,7 +62,22 @@
                 "DirectMessage": "Slack User"
             },
             "groupName": "slackConfig",
-            "helpMarkDown": "Select the Destination for the Slack Message. To send a message/upload file to a *Channel*, select _Slack Channel_. To send a direct message/upload file to a *User*, select _Slack User_."
+            "helpMarkDown": "Select the Destination for the Slack Message. To send a message/upload file to a **Channel**, select _Slack Channel_. To send a direct message/upload file to a **User**, select _Slack User_."
+        },
+        {
+            "name": "UserIdType",
+            "type": "pickList",
+            "label": "User Identifier Type",
+            "defaultValue": "Name",
+            "required": false,
+            "visibleRule": "Destination = DirectMessage",
+            "options": {
+                "Name": "Name",
+                "RealName": "Real Name",
+                "DisplayName": "Display Name"
+            },
+            "groupName": "slackConfig",
+            "helpMarkDown": "Select the User Identifier Type you will use as to identify the Slack User. Currently supports **Name**, **Real Name** _(not profile.real_name in the slack API)_ and **Display Name**. For more details about why this change was made,  read [A Lingering Farewell to the Slack Username](https://api.slack.com/changelog/2017-09-the-one-about-usernames)"
         },
         {
             "name": "Channel",
