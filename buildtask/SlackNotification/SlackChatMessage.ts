@@ -28,7 +28,33 @@ export class SlackChatMessage implements ISlackChatMessage {
     send(): Promise<string> {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
-                const channelId: string = await this._channelService.getChannelId();
+                const channelIds: Array<string> = await this._channelService.getChannelIds();
+                const results: Array<Promise<string>> = new Array(channelIds.length);
+
+                for (const channelId of channelIds) {
+                    const result: Promise<string> = this.sendMessage(channelId);
+                    results.push(result);
+                }
+
+                Promise
+                    .all(results)
+                    .then(() => {
+                        resolve('All messages posted successfully.');
+                    })
+                    .catch(err => {
+                        reject(`One or more messages failed to deliver. ${err.message || err}`);
+                    });
+
+            } catch (err) {
+                reject(err.message || err);
+            }
+        });
+        return promise;
+    }
+
+    private sendMessage(channelId: string): Promise<string> {
+        const promise = new Promise<string>(async (resolve, reject) => {
+            try {
                 const result: WebAPICallResult = await this._client.chat.postMessage({
                     channel: channelId,
                     text: this._taskInput.Message,
@@ -53,7 +79,7 @@ export class SlackChatMessage implements ISlackChatMessage {
                 });
 
                 if (result.ok) {
-                    resolve('Chat Message Posted Successfully.');
+                    resolve(`Chat Message to ${channelId} Posted Successfully.`);
                 } else {
                     reject(`Posting Chat Message Failed. Error: ${result.error}`);
                 }
