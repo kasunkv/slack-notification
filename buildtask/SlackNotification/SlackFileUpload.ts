@@ -27,9 +27,35 @@ export class SlackFileUpload implements ISlackFileUpload {
     }
 
     upload(): Promise<string> {
+        const promise: Promise<string> = new Promise<string>(async (resolve, reject) => {
+            try {
+                const channelIds: Array<string> = await this._channelService.getChannelIds();
+                const results: Array<Promise<string>> = new Array(channelIds.length);
+
+                for (const channelId of channelIds) {
+                    const result: Promise<string> = this.uploadFile(channelId);
+                    results.push(result);
+                }
+
+                Promise
+                    .all(results)
+                    .then(() => {
+                        resolve('All file uploads completed successfully.');
+                    })
+                    .catch(err => {
+                        reject(`One or more file uploads failed to complete. ${err.message || err}`);
+                    });
+
+            } catch (err) {
+                reject(err.message || err);
+            }
+        });
+        return promise;
+    }
+
+    private uploadFile(channelId: string): Promise<string> {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
-                const channelId: string = await this._channelService.getChannelId();
                 const result: WebAPICallResult = await this._client.files.upload({
                     channels: channelId,
                     file: fs.createReadStream(this._taskInput.UploadFilePath),
