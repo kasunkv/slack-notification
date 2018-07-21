@@ -52,41 +52,13 @@
             "helpMarkDown": "Text shown as the author of the message in Slack."
         },
         {
-            "name": "Destination",
-            "type": "pickList",
-            "label": "Message Destination",
-            "defaultValue": "Channel",
-            "required": true,
-            "options": {
-                "Channel": "Slack Channel",
-                "DirectMessage": "Slack User"
-            },
-            "groupName": "slackConfig",
-            "helpMarkDown": "Select the Destination for the Slack Message. To send a message/upload file to a **Channel**, select _Slack Channel_. To send a direct message/upload file to a **User**, select _Slack User_."
-        },
-        {
-            "name": "UserIdType",
-            "type": "pickList",
-            "label": "User Identifier Type",
-            "defaultValue": "Name",
-            "required": false,
-            "visibleRule": "Destination = DirectMessage",
-            "options": {
-                "Name": "Name",
-                "RealName": "Real Name",
-                "DisplayName": "Display Name"
-            },
-            "groupName": "slackConfig",
-            "helpMarkDown": "Select the User Identifier Type you will use as to identify the Slack User. Currently supports **Name**, **Real Name** _(not profile.real_name in the slack API)_ and **Display Name**. For more details about why this change was made,  read [A Lingering Farewell to the Slack Username](https://api.slack.com/changelog/2017-09-the-one-about-usernames)"
-        },
-        {
             "name": "Channel",
             "type": "string",
-            "label": "Channel or User",
+            "label": "Channel(s)/User(s)",
             "required": true,
             "defaultValue": "",
             "groupName": "slackConfig",
-            "helpMarkDown": "Channel/User where the message is sent to. This value is tied to the *Destination* input option. If you selected _Slack Channel_ as the Destination, you can enter the slack channel name here. You can either add the channel name with *#* prefix or without the prefix. _(E.g. #general, general)._ If you selected _Slack User_ as the Destination, You need to enter the *Real Name* of the Slack User without any prefix. _(E.g. John Smith, Halc Lewis)._ The real name is *Case Sensitive* so make sure to type it correctly. If the Channel Name or User's Real Name is invalid, the task will finish without sending any notifications."
+            "helpMarkDown": "A comma **(,)** separated list of channel names and/or user's name, real name or display name. Can be any combination. Channel names must be prefixed with **#** and user's names must be prefixed with **@**. If **#** or **@** is not used, the value is considered as either a real name or a display name. You can use any combination of channel name, user's name, real name and display name. _(e.g. #general, @johnd, #build, @janedoe, John Doe)_"
         },
         {
             "name": "IconUrl",
