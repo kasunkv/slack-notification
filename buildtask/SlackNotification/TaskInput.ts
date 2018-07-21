@@ -85,6 +85,14 @@ export class TaskInput implements ITaskInput {
         throw new Error('The Slack Channel Name/User Real Name is Required');
     }
 
+    get ChannelNew(): Array<string> {
+        if (this._channel) {
+            const channelList: Array<string> = this._channel.split(',').map((str: string) => str.trim());
+            return channelList;
+        }
+        throw new Error('The Slack Channel Name/User Real Name is Required');
+    }
+
     get Message(): string {
         if (this._message) {
             return this._message;
