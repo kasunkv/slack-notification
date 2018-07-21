@@ -1,4 +1,4 @@
 export interface ISlackChannelService {
-    getChannelId(): Promise<string>;
+    //getChannelId(): Promise<string>;
     getChannelIds(): Promise<Array<string>>;
 }

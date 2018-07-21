@@ -1,7 +1,7 @@
 export interface ITaskInput {
     MessageAuthor: string;
-    Destination: string;
-    UserIdType: string;
+    //Destination: string;
+    //UserIdType: string;
     Channel: string;
     ChannelNew: Array<string>;
     Message: string;

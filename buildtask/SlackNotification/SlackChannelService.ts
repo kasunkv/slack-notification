@@ -53,35 +53,35 @@ export class SlackChannelService implements ISlackChannelService {
     return promise;
   }
 
-  getChannelId(): Promise<string> {
-    const promise: Promise<string> = new Promise(async (resolve, reject) => {
-      try {
-        if (this._taskInput.Destination === DestinationType.CHANNEL) {
-          resolve(this._taskInput.Channel);
-        } else {
-          let userId: string = UserIdType.NAME;
+  // getChannelId(): Promise<string> {
+  //   const promise: Promise<string> = new Promise(async (resolve, reject) => {
+  //     try {
+  //       if (this._taskInput.Destination === DestinationType.CHANNEL) {
+  //         resolve(this._taskInput.Channel);
+  //       } else {
+  //         let userId: string = UserIdType.NAME;
 
-          switch (this._taskInput.UserIdType) {
-            case UserIdType.NAME:
-              userId = await this.getUserIdByName(this._taskInput.Channel);
-              break;
-            case UserIdType.DISPLAY_NAME:
-              userId = await this.getUserIdByDisplayName(this._taskInput.Channel);
-              break;
-            case UserIdType.REAL_NAME:
-              userId = await this.getUserIdByRealName(this._taskInput.Channel);
-              break;
-          }
+  //         switch (this._taskInput.UserIdType) {
+  //           case UserIdType.NAME:
+  //             userId = await this.getUserIdByName(this._taskInput.Channel);
+  //             break;
+  //           case UserIdType.DISPLAY_NAME:
+  //             userId = await this.getUserIdByDisplayName(this._taskInput.Channel);
+  //             break;
+  //           case UserIdType.REAL_NAME:
+  //             userId = await this.getUserIdByRealName(this._taskInput.Channel);
+  //             break;
+  //         }
 
-          const result: any = await this.getSlackChannelIdByUserId(userId);
-          resolve(result.channel.id);
-        }
-      } catch (err) {
-        reject(err.message || err);
-      }
-    });
-    return promise;
-  }
+  //         const result: any = await this.getSlackChannelIdByUserId(userId);
+  //         resolve(result.channel.id);
+  //       }
+  //     } catch (err) {
+  //       reject(err.message || err);
+  //     }
+  //   });
+  //   return promise;
+  // }
 
   private getUserIdByRealNameOrDisplayName(name: string): Promise<string> {
     const promise: Promise<string> = new Promise<string>(async (resolve, reject) => {
