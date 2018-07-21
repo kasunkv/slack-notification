@@ -6,6 +6,7 @@ import { ISlackClient } from '../interfaces/ISlackClient';
 import { ISlackFileUpload } from '../interfaces/ISlackFileUpload';
 import { ISlackChatMessage } from '../interfaces/ISlackChatMessage';
 import { ISlackChannelService } from '../interfaces/ISlackChannelService';
+import { ILogger } from '../interfaces/ILogger';
 
 import TYPES from './types';
 
@@ -14,6 +15,7 @@ import { SlackClient } from '../SlackClient';
 import { SlackFileUpload } from '../SlackFileUpload';
 import { SlackChatMessage } from '../SlackChatMessage';
 import { SlackChannelService } from './../SlackChannelService';
+import { Logger } from '../Logger';
 
 const container = new Container();
 
@@ -22,5 +24,6 @@ container.bind<ISlackClient>(TYPES.ISlackClient).to(SlackClient).inSingletonScop
 container.bind<ISlackChatMessage>(TYPES.ISlackChatMessage).to(SlackChatMessage).inTransientScope();
 container.bind<ISlackFileUpload>(TYPES.ISlackFileUpload).to(SlackFileUpload).inTransientScope();
 container.bind<ISlackChannelService>(TYPES.ISlackChannelService).to(SlackChannelService).inTransientScope();
+container.bind<ILogger>(TYPES.ILogger).to(Logger).inTransientScope();
 
 export default container;
