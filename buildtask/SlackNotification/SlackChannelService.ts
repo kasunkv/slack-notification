@@ -1,3 +1,4 @@
+import { ILogger } from './interfaces/ILogger';
 import { inject, injectable } from 'inversify';
 import { WebClient, WebAPICallResult } from '@slack/client/dist';
 
@@ -11,41 +12,57 @@ import { DestinationType, UserIdType } from './Constants';
 @injectable()
 export class SlackChannelService implements ISlackChannelService {
   private _taskInput: ITaskInput;
+  private _logger: ILogger;
   private _client: WebClient;
 
   constructor(
     @inject(TYPES.ISlackClient) slackClient: ISlackClient,
+    @inject(TYPES.ILogger) logger: ILogger,
     @inject(TYPES.ITaskInput) taskInput: ITaskInput
   ) {
     this._client = slackClient.getInstance();
     this._taskInput = taskInput;
+    this._logger = logger;
   }
 
   getChannelIds(): Promise<Array<string>> {
     const promise: Promise<Array<string>> = new Promise<Array<string>>(async (resolve, reject) => {
       try {
         const channels: Array<string> = this._taskInput.ChannelNew;
-        let channelId: string = '';
+        let userId: string = '';
+        let result: any = null;
         const channelIds: Array<string> = new Array(channels.length);
 
+        this._logger.logDebug(`Channels/User found: ${channelIds.length}`);
+
         for (const channel of channels) {
+          this._logger.logDebug(`Channel name: ${channel}`);
+
           switch (channel.charAt(0)) {
             case '#':
               channelIds.push(channel);
+              userId = '';
               break;
 
             case '@':
-              channelId = await this.getUserIdByName(channel.substr(1, channel.length));
-              channelIds.push(channelId);
+              userId = await this.getUserIdByName(channel.substr(1, channel.length));
               break;
 
             default:
-              channelId = await this.getUserIdByRealNameOrDisplayName(channel);
-              channelIds.push(channelId);
+              userId = await this.getUserIdByRealNameOrDisplayName(channel);
               break;
+          }
+
+          if (userId !== '') {
+            result = await this.getSlackChannelIdByUserId(userId);
+            const channelId: string = result.channel.id;
+            channelIds.push(channelId);
+
+            this._logger.logDebug(`Channel name: ${channel} | UserId: ${userId} | ChannelId: ${channelId}`);
           }
         }
         resolve(channelIds);
+
       } catch (err) {
         reject(err.message || err);
       }
@@ -89,6 +106,7 @@ export class SlackChannelService implements ISlackChannelService {
         const users: Array<any> = await this.getSlackUserListAsArray();
         users.forEach(user => {
           if (user.real_name === name || user.profile.display_name === name) {
+            this._logger.logDebug(`User found: ${name} with real_name: ${user.real_name} or display_name: ${user.profile.display_name}`);
             resolve(user.id);
           }
         });
@@ -142,6 +160,7 @@ export class SlackChannelService implements ISlackChannelService {
           const users: Array<any> = await this.getSlackUserListAsArray();
           users.forEach(user => {
             if (user.name === name) {
+              this._logger.logDebug(`User found: ${name} with id ${user.id}`);
               resolve(user.id);
             }
           });
