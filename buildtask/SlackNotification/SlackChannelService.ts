@@ -21,6 +21,38 @@ export class SlackChannelService implements ISlackChannelService {
     this._taskInput = taskInput;
   }
 
+  getChannelIds(): Promise<Array<string>> {
+    const promise: Promise<Array<string>> = new Promise<Array<string>>(async (resolve, reject) => {
+      try {
+        const channels: Array<string> = this._taskInput.ChannelNew;
+        let channelId: string = '';
+        const channelIds: Array<string> = new Array(channels.length);
+
+        for (const channel of channels) {
+          switch (channel.charAt(0)) {
+            case '#':
+              channelIds.push(channel);
+              break;
+
+            case '@':
+              channelId = await this.getUserIdByName(channel.substr(1, channel.length));
+              channelIds.push(channelId);
+              break;
+
+            default:
+              channelId = await this.getUserIdByRealNameOrDisplayName(channel);
+              channelIds.push(channelId);
+              break;
+          }
+        }
+        resolve(channelIds);
+      } catch (err) {
+        reject(err.message || err);
+      }
+    });
+    return promise;
+  }
+
   getChannelId(): Promise<string> {
     const promise: Promise<string> = new Promise(async (resolve, reject) => {
       try {
@@ -31,10 +63,10 @@ export class SlackChannelService implements ISlackChannelService {
 
           switch (this._taskInput.UserIdType) {
             case UserIdType.NAME:
-              userId = await this.getUserUdByName(this._taskInput.Channel);
+              userId = await this.getUserIdByName(this._taskInput.Channel);
               break;
             case UserIdType.DISPLAY_NAME:
-              userId = await this.getUserUdByDisplayName(this._taskInput.Channel);
+              userId = await this.getUserIdByDisplayName(this._taskInput.Channel);
               break;
             case UserIdType.REAL_NAME:
               userId = await this.getUserIdByRealName(this._taskInput.Channel);
@@ -44,6 +76,22 @@ export class SlackChannelService implements ISlackChannelService {
           const result: any = await this.getSlackChannelIdByUserId(userId);
           resolve(result.channel.id);
         }
+      } catch (err) {
+        reject(err.message || err);
+      }
+    });
+    return promise;
+  }
+
+  private getUserIdByRealNameOrDisplayName(name: string): Promise<string> {
+    const promise: Promise<string> = new Promise<string>(async (resolve, reject) => {
+      try {
+        const users: Array<any> = await this.getSlackUserListAsArray();
+        users.forEach(user => {
+          if (user.real_name === name || user.profile.display_name === name) {
+            resolve(user.id);
+          }
+        });
       } catch (err) {
         reject(err.message || err);
       }
@@ -69,7 +117,7 @@ export class SlackChannelService implements ISlackChannelService {
     return promise;
   }
 
-  private getUserUdByDisplayName(name: string): Promise<string> {
+  private getUserIdByDisplayName(name: string): Promise<string> {
     const promise: Promise<string> = new Promise<string>(
       async (resolve, reject) => {
         try {
@@ -87,7 +135,7 @@ export class SlackChannelService implements ISlackChannelService {
     return promise;
   }
 
-  private getUserUdByName(name: string): Promise<string> {
+  private getUserIdByName(name: string): Promise<string> {
     const promise: Promise<string> = new Promise<string>(
       async (resolve, reject) => {
         try {
