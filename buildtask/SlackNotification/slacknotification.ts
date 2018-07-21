@@ -7,6 +7,8 @@ import TYPES from './di/types';
 import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
 import { ISlackFileUpload } from './interfaces/ISlackFileUpload';
+import { ILogger } from './interfaces/ILogger';
+
 import { NotificationType } from './Constants';
 
 Task.setResourcePath(path.join(__dirname, 'task.json'));
@@ -14,9 +16,11 @@ Task.setResourcePath(path.join(__dirname, 'task.json'));
 async function run(): Promise<string> {
     const promise = new Promise<string>(async (resolve, reject) => {
         try {
-            
+
             const taskInput = container.get<ITaskInput>(TYPES.ITaskInput);
-            Task.debug(taskInput.toJSON());
+            const logger = container.get<ILogger>(TYPES.ILogger);
+
+            logger.logDebug(taskInput.toJSON());
 
             switch (taskInput.NotificationType) {
 
@@ -31,7 +35,7 @@ async function run(): Promise<string> {
                     const uploadResult: string = await fileUpload.upload();
                     resolve(uploadResult);
                     break;
-            
+
                 default:
                     break;
             }
