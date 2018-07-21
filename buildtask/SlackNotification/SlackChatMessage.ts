@@ -7,6 +7,7 @@ import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
 import { ISlackChannelService } from './interfaces/ISlackChannelService';
+import { ILogger } from './interfaces/ILogger';
 
 @injectable()
 export class SlackChatMessage implements ISlackChatMessage {
@@ -14,15 +15,18 @@ export class SlackChatMessage implements ISlackChatMessage {
     private _taskInput: ITaskInput;
     private _client: WebClient;
     private _channelService: ISlackChannelService;
+    private _logger: ILogger;
 
     constructor(
         @inject(TYPES.ISlackClient) slackClient: ISlackClient,
         @inject(TYPES.ITaskInput) taskInput: ITaskInput,
-        @inject(TYPES.ISlackChannelService) slackChannelService: ISlackChannelService
+        @inject(TYPES.ISlackChannelService) slackChannelService: ISlackChannelService,
+        @inject(TYPES.ILogger) logger: ILogger
     ) {
         this._client = slackClient.getInstance();
         this._taskInput = taskInput;
         this._channelService = slackChannelService;
+        this._logger = logger;
     }
 
     send(): Promise<string> {
@@ -79,9 +83,10 @@ export class SlackChatMessage implements ISlackChatMessage {
                 });
 
                 if (result.ok) {
-                    resolve(`Chat Message to ${channelId} Posted Successfully.`);
+                    this._logger.logDebug(`Message send to ${channelId}`);
+                    resolve(`Chat message to channelId: ${channelId} posted successfully.`);
                 } else {
-                    reject(`Posting Chat Message Failed. Error: ${result.error}`);
+                    reject(`Posting chat message failed. Error: ${result.error}`);
                 }
 
             } catch (err) {

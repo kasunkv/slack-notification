@@ -8,6 +8,7 @@ import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ISlackFileUpload } from './interfaces/ISlackFileUpload';
 import { ISlackChannelService } from './interfaces/ISlackChannelService';
+import { ILogger } from './interfaces/ILogger';
 
 @injectable()
 export class SlackFileUpload implements ISlackFileUpload {
@@ -15,15 +16,18 @@ export class SlackFileUpload implements ISlackFileUpload {
     private _client: WebClient;
     private _taskInput: ITaskInput;
     private _channelService: ISlackChannelService;
+    private _logger: ILogger;
 
     constructor(
         @inject(TYPES.ISlackClient) slackClient: ISlackClient,
         @inject(TYPES.ITaskInput) taskInput: ITaskInput,
-        @inject(TYPES.ISlackChannelService) slackChannelService: ISlackChannelService
+        @inject(TYPES.ISlackChannelService) slackChannelService: ISlackChannelService,
+        @inject(TYPES.ILogger) logger: ILogger
     ) {
         this._client = slackClient.getInstance();
         this._taskInput = taskInput;
         this._channelService = slackChannelService;
+        this._logger = logger;
     }
 
     upload(): Promise<string> {
@@ -65,9 +69,10 @@ export class SlackFileUpload implements ISlackFileUpload {
                 });
 
                 if (result.ok) {
-                    resolve('File Uploaded Successfully.');
+                    this._logger.logDebug(`File uploaded to channelId: ${channelId} successfully.`);
+                    resolve('File uploaded successfully.');
                 } else {
-                    reject(`File Upload Failed. Error: ${result.error}`);
+                    reject(`File upload failed. Error: ${result.error}`);
                 }
 
             } catch (err) {
