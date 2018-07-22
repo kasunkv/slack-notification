@@ -33,7 +33,7 @@ export class SlackChannelService implements ISlackChannelService {
         let result: any = null;
         const channelIds: Array<string> = new Array(channels.length);
 
-        this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channels/User found: ${channelIds.length}`);
+        this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channels/User found: ${channels.length}`);
 
         for (const channel of channels) {
           this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channel name: ${channel}`);
@@ -61,6 +61,8 @@ export class SlackChannelService implements ISlackChannelService {
             this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channel name: ${channel} | UserId: ${userId} | ChannelId: ${channelId}`);
           }
         }
+
+        channelIds.map(id => this._logger.logDebug(`[SlackChannelService.getChannelIds()] Returning: ${id}`));
         resolve(channelIds);
 
       } catch (err) {
