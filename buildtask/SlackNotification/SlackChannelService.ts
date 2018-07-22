@@ -63,6 +63,8 @@ export class SlackChannelService implements ISlackChannelService {
         }
 
         channelIds.map(id => this._logger.logDebug(`[SlackChannelService.getChannelIds()] Returning: ${id}`));
+        this._logger.logDebug(`[SlackChannelService.getChannelIds()] ChannelID count: ${channelIds.length}`);
+
         resolve(channelIds);
 
       } catch (err) {
