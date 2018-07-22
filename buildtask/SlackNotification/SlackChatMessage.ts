@@ -38,6 +38,7 @@ export class SlackChatMessage implements ISlackChatMessage {
                 this._logger.logDebug(`[SlackChatMessage.Send()] Channel IDs found: ${channelIds.length}`);
 
                 for (const channelId of channelIds) {
+                    this._logger.logDebug(`[SlackChatMessage.Send()] Sending message Channel ID: ${channelId}`);
                     const result: Promise<string> = this.sendMessage(channelId);
                     results.push(result);
                 }

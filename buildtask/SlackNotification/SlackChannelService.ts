@@ -33,10 +33,10 @@ export class SlackChannelService implements ISlackChannelService {
         let result: any = null;
         const channelIds: Array<string> = new Array(channels.length);
 
-        this._logger.logDebug(`[SlackChannelService.getChannelIds] Channels/User found: ${channelIds.length}`);
+        this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channels/User found: ${channelIds.length}`);
 
         for (const channel of channels) {
-          this._logger.logDebug(`Channel name: ${channel}`);
+          this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channel name: ${channel}`);
 
           switch (channel.charAt(0)) {
             case '#':

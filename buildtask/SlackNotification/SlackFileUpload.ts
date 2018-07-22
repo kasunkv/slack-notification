@@ -39,6 +39,7 @@ export class SlackFileUpload implements ISlackFileUpload {
                 this._logger.logDebug(`[SlackFileUpload.upload()] Channel IDs found: ${channelIds.length}`);
 
                 for (const channelId of channelIds) {
+                    this._logger.logDebug(`[SlackFileUpload.upload()] Uploading file. Channel ID: ${channelId}`);
                     const result: Promise<string> = this.uploadFile(channelId);
                     results.push(result);
                 }
