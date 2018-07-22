@@ -33,7 +33,7 @@ export class SlackChannelService implements ISlackChannelService {
         let result: any = null;
         const channelIds: Array<string> = new Array(channels.length);
 
-        this._logger.logDebug(`Channels/User found: ${channelIds.length}`);
+        this._logger.logDebug(`[SlackChannelService.getChannelIds] Channels/User found: ${channelIds.length}`);
 
         for (const channel of channels) {
           this._logger.logDebug(`Channel name: ${channel}`);
@@ -58,7 +58,7 @@ export class SlackChannelService implements ISlackChannelService {
             const channelId: string = result.channel.id;
             channelIds.push(channelId);
 
-            this._logger.logDebug(`Channel name: ${channel} | UserId: ${userId} | ChannelId: ${channelId}`);
+            this._logger.logDebug(`[SlackChannelService.getChannelIds()] Channel name: ${channel} | UserId: ${userId} | ChannelId: ${channelId}`);
           }
         }
         resolve(channelIds);
@@ -106,7 +106,7 @@ export class SlackChannelService implements ISlackChannelService {
         const users: Array<any> = await this.getSlackUserListAsArray();
         users.forEach(user => {
           if (user.real_name === name || user.profile.display_name === name) {
-            this._logger.logDebug(`User found: ${name} with real_name: ${user.real_name} or display_name: ${user.profile.display_name}`);
+            this._logger.logDebug(`[SlackChannelService.getUserIdByRealNameOrDisplayName()] User found: ${name} with real_name: ${user.real_name} or display_name: ${user.profile.display_name}`);
             resolve(user.id);
           }
         });
@@ -160,7 +160,7 @@ export class SlackChannelService implements ISlackChannelService {
           const users: Array<any> = await this.getSlackUserListAsArray();
           users.forEach(user => {
             if (user.name === name) {
-              this._logger.logDebug(`User found: ${name} with id ${user.id}`);
+              this._logger.logDebug(`[SlackChannelService.getUserIdByName()]User found: ${name} with id ${user.id}`);
               resolve(user.id);
             }
           });

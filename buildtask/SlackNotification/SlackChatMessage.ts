@@ -35,6 +35,8 @@ export class SlackChatMessage implements ISlackChatMessage {
                 const channelIds: Array<string> = await this._channelService.getChannelIds();
                 const results: Array<Promise<string>> = new Array(channelIds.length);
 
+                this._logger.logDebug(`[SlackChatMessage.Send()] Channel IDs found: ${channelIds.length}`);
+
                 for (const channelId of channelIds) {
                     const result: Promise<string> = this.sendMessage(channelId);
                     results.push(result);
@@ -83,9 +85,10 @@ export class SlackChatMessage implements ISlackChatMessage {
                 });
 
                 if (result.ok) {
-                    this._logger.logDebug(`Message send to ${channelId}`);
+                    this._logger.logDebug(`[SlackChatMessage.sendMessage()] Message send to ${channelId}`);
                     resolve(`Chat message to channelId: ${channelId} posted successfully.`);
                 } else {
+                    this._logger.logDebug(`[SlackChatMessage.sendMessage()] ChannelID: ${channelId} Error: ${result.error}`);
                     reject(`Posting chat message failed. Error: ${result.error}`);
                 }
 

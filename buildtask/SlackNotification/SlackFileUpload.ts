@@ -36,6 +36,8 @@ export class SlackFileUpload implements ISlackFileUpload {
                 const channelIds: Array<string> = await this._channelService.getChannelIds();
                 const results: Array<Promise<string>> = new Array(channelIds.length);
 
+                this._logger.logDebug(`[SlackFileUpload.upload()] Channel IDs found: ${channelIds.length}`);
+
                 for (const channelId of channelIds) {
                     const result: Promise<string> = this.uploadFile(channelId);
                     results.push(result);
@@ -69,9 +71,10 @@ export class SlackFileUpload implements ISlackFileUpload {
                 });
 
                 if (result.ok) {
-                    this._logger.logDebug(`File uploaded to channelId: ${channelId} successfully.`);
+                    this._logger.logDebug(`[SlackFileUpload.uploadFile()] File uploaded to channelId: ${channelId} successfully.`);
                     resolve('File uploaded successfully.');
                 } else {
+                    this._logger.logDebug(`[SlackChatMessage.uploadFile()] ChannelID: ${channelId} Error: ${result.error}`);
                     reject(`File upload failed. Error: ${result.error}`);
                 }
 
