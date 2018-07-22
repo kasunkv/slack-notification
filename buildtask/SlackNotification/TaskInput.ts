@@ -2,13 +2,10 @@ import * as Task from 'vsts-task-lib';
 import { injectable } from 'inversify';
 
 import { ITaskInput } from './interfaces/ITaskInput';
-import { DestinationType, UserIdType } from './Constants';
 
 @injectable()
 export class TaskInput implements ITaskInput {
     private _messageAuthor: string;
-    //private _destination: string;
-    //private _userIdType: string;
     private _channel: string;
     private _message: string;
     private _slackApiToken: string;
@@ -32,13 +29,11 @@ export class TaskInput implements ITaskInput {
     constructor() {
         // Required Inputs
         this._messageAuthor = Task.getInput('MessageAuthor', true);
-        //this._destination = Task.getInput('Destination', true);
         this._channel = Task.getInput('Channel', true);
         this._slackApiToken = Task.getInput('SlackApiToken', true);
         this._uploadFilePath = Task.getInput('UploadFilePath');
 
-        // Optional Inputs        
-        //this._userIdType = Task.getInput('UserIdType');
+        // Optional Inputs
         this._message = Task.getInput('Message');
         this._iconUrl = Task.getInput('IconUrl');
         this._authorName = Task.getInput('AuthorName');
@@ -64,28 +59,7 @@ export class TaskInput implements ITaskInput {
         throw new Error('The Message Author is Required');
     }
 
-    // get Destination(): string {
-    //     if (this._destination) {
-    //         return this._destination;
-    //     }
-    //     return DestinationType.CHANNEL;
-    // }
-
-    // get UserIdType(): string {
-    //     if (this._userIdType) {
-    //         return this._userIdType;
-    //     }
-    //     return UserIdType.NAME;
-    // }
-
-    get Channel(): string {
-        if (this._channel) {
-            return this._channel.trim();
-        }
-        throw new Error('The Slack Channel Name/User Real Name is Required');
-    }
-
-    get ChannelNew(): Array<string> {
+    get Channel(): Array<string> {
         if (this._channel) {
             const channelList: Array<string> = this._channel.split(',').map((str: string) => str.trim());
             return channelList;
@@ -227,8 +201,6 @@ export class TaskInput implements ITaskInput {
         const obj: object = {
             slackApiToken: '****************',
             messageAuthor: this._messageAuthor,
-            //destination: this._destination,
-            //userIdType: this._userIdType,
             channel: this._channel,
             uploadFilePath: this._uploadFilePath,
             message: this._message,

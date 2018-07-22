@@ -1,9 +1,6 @@
 export interface ITaskInput {
     MessageAuthor: string;
-    //Destination: string;
-    //UserIdType: string;
-    Channel: string;
-    ChannelNew: Array<string>;
+    Channel: Array<string>;
     Message: string;
     SlackApiToken: string;
 
