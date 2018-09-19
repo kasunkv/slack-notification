@@ -136,7 +136,7 @@
             "label": "Attachment Pre-Text",
             "required": false,
             "groupName": "notificationOptions",
-            "helpMarkDown": "This is optional text that appears above the message attachment block.",
+            "helpMarkDown": "This is optional text that appears above the message attachment block. If used, this fields requires a variable name. if the name of the variable is PreText, don't use $(PreText), simply use PReText as the content of this field and task will expand the variable content internally.",
             "visibleRule": "NotificationType = ChatMessage"
         },
         {

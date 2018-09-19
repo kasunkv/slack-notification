@@ -209,7 +209,7 @@ export class TaskInput implements ITaskInput {
             authorLink: this._authorLink,
             title: this._title,
             titleLink: this._titleLink,
-            preText: this._preText,
+            preText: process.env[this._preText],
             text: this._text,
             color: this._color,
             imageUrl: this._imageUrl,
