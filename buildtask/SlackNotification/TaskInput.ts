@@ -69,7 +69,7 @@ export class TaskInput implements ITaskInput {
 
     get Message(): string {
         if (this._message) {
-            return this._message;
+            return this.formatMultilineText(this._message);
         }
         return '';
     }
@@ -118,14 +118,14 @@ export class TaskInput implements ITaskInput {
 
     get PreText(): string {
         if (this._preText) {
-            return this._preText;
+            return this.formatMultilineText(this._preText);
         }
         return '';
     }
 
     get Text(): string {
         if (this._text) {
-            return this._text;
+            return this.formatMultilineText(this._text);
         }
         return '';
     }
@@ -224,4 +224,9 @@ export class TaskInput implements ITaskInput {
         return JSON.stringify(obj);
     }
 
+    formatMultilineText(input: string): string {
+        return input
+                .replace(new RegExp('\n', 'g'), '\n')
+                .replace(new RegExp('`n', 'g'), '\n');
+    }
 }

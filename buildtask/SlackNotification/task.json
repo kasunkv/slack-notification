@@ -132,12 +132,16 @@
         },
         {
             "name": "PreText",
-            "type": "string",
+            "type": "multiLine",
             "label": "Attachment Pre-Text",
             "required": false,
             "groupName": "notificationOptions",
             "helpMarkDown": "This is optional text that appears above the message attachment block.",
-            "visibleRule": "NotificationType = ChatMessage"
+            "visibleRule": "NotificationType = ChatMessage",
+            "properties": {
+                "resizable": true,
+                "rows": "2"
+            }
         },
         {
             "name": "Text",
