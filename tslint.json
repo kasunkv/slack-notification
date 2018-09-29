@@ -95,7 +95,7 @@
     
         /* TSLINT-ESLINT-RULES rules */ 
         "no-constant-condition": true,  
-        "no-control-regex": true,
+        "no-control-regex": false,
         "no-duplicate-case": true,
         "no-empty-character-class": true,
         "no-extra-boolean-cast": true,
