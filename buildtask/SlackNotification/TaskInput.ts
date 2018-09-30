@@ -226,7 +226,8 @@ export class TaskInput implements ITaskInput {
 
     formatMultilineText(input: string): string {
         return input
-            .replace(new RegExp('\n', 'g'), '\'\n\'')
+            .replace(new RegExp('\n', 'g'), '`n')
+            .replace(new RegExp('\t', 'g'), '`t')
             .replace(new RegExp('`n', 'g'), '\n')
             .replace(new RegExp('`t', 'g'), '\t');
     }
