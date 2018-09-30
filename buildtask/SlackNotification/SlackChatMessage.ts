@@ -62,6 +62,11 @@ export class SlackChatMessage implements ISlackChatMessage {
     private sendMessage(channelId: string): Promise<string> {
         const promise = new Promise<string>(async (resolve, reject) => {
             try {
+
+                this._logger.logDebug(`[SlackChatMessage.sendMessage()] Message: ${this._taskInput.Message}`);
+                this._logger.logDebug(`[SlackChatMessage.sendMessage()] Pre-Text: ${this._taskInput.PreText}`);
+                this._logger.logDebug(`[SlackChatMessage.sendMessage()] Text: ${this._taskInput.Text}`);
+
                 const result: WebAPICallResult = await this._client.chat.postMessage({
                     channel: channelId,
                     text: this._taskInput.Message,
