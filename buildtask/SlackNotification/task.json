@@ -95,6 +95,16 @@
             }
         },
         {
+            "name": "UseVariableForMessage",
+            "type": "boolean",
+            "label": "Use a Variable as the Content of the Message.",
+            "required": false,
+            "defaultValue": false,
+            "groupName": "notificationOptions",
+            "helpMarkDown": "Enable this to read the content of the slack message from a variable set at runtime or pre-defined. Enter the variable name into the input box without the surrounding $() notation. _(e.g. Release.ReleaseNotes)_. **Note:** _If you want to use a combination of text and variables put in to the message input turn off this option. And use the normal variable notation with $(). Please not that doing this might result in message formatting issues. (e.g. Adding new line characters explicitly in to the input)_",
+            "visibleRule": "NotificationType = ChatMessage"
+        },
+        {
             "name": "AuthorName",
             "type": "string",
             "label": "Author Name",
@@ -144,6 +154,16 @@
             }
         },
         {
+            "name": "UseVariableForPreText",
+            "type": "boolean",
+            "label": "Use a Variable as the Content of the Attachment Pre-Text.",
+            "required": false,
+            "defaultValue": false,
+            "groupName": "notificationOptions",
+            "helpMarkDown": "Enable this to read the content of the slack attachment pre-text from a variable set at runtime or pre-defined. Enter the variable name into the input box without the surrounding $() notation. _(e.g. Release.ReleaseNotes)_. **Note:** _If you want to use a combination of text and variables put in to the attachment pre-text input turn off this option. And use the normal variable notation with $(). Please not that doing this might result in message formatting issues. (e.g. Adding new line characters explicitly in to the input)_",
+            "visibleRule": "NotificationType = ChatMessage"
+        },
+        {
             "name": "Text",
             "type": "multiLine",
             "label": "Attachment Text",
@@ -155,6 +175,16 @@
                 "resizable": true,
                 "rows": "10"
             }
+        },
+        {
+            "name": "UseVariableForText",
+            "type": "boolean",
+            "label": "Use a Variable as the Content of the Attachment Message.",
+            "required": false,
+            "defaultValue": false,
+            "groupName": "notificationOptions",
+            "helpMarkDown": "Enable this to read the content of the slack attachment text from a variable set at runtime or pre-defined. Enter the variable name into the input box without the surrounding $() notation. _(e.g. Release.ReleaseNotes)_. **Note:** _If you want to use a combination of text and variables put in to the attachment text input turn off this option. And use the normal variable notation with $(). Please not that doing this might result in message formatting issues. (e.g. Adding new line characters explicitly in to the input)_",
+            "visibleRule": "NotificationType = ChatMessage"
         },
         {
             "name": "Color",
