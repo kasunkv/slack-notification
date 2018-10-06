@@ -2,6 +2,7 @@ export interface ITaskInput {
     MessageAuthor: string;
     Channel: Array<string>;
     Message: string;
+    UseVariableForMessage: boolean;
     SlackApiToken: string;
 
     IconUrl: string;
@@ -10,7 +11,9 @@ export interface ITaskInput {
     Title: string;
     TitleLink: string;
     PreText: string;
+    UseVariableForPreText: boolean;
     Text: string;
+    UseVariableForText: boolean;
     Color: string;
     ImageUrl: string;
     FooterText: string;

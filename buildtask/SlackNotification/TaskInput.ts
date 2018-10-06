@@ -8,6 +8,7 @@ export class TaskInput implements ITaskInput {
     private _messageAuthor: string;
     private _channel: string;
     private _message: string;
+    private _useVariableForMessage: boolean;
     private _slackApiToken: string;
     private _iconUrl: string;
     private _authorName: string;
@@ -15,7 +16,9 @@ export class TaskInput implements ITaskInput {
     private _title: string;
     private _titleLink: string;
     private _preText: string;
+    private _useVariableForPreText: boolean;
     private _text: string;
+    private _useVariableForText: boolean;
     private _color: string;
     private _imageUrl: string;
     private _footerText: string;
@@ -35,13 +38,16 @@ export class TaskInput implements ITaskInput {
 
         // Optional Inputs
         this._message = Task.getInput('Message');
+        this._useVariableForMessage = Task.getBoolInput('UseVariableForMessage');
         this._iconUrl = Task.getInput('IconUrl');
         this._authorName = Task.getInput('AuthorName');
         this._authorLink = Task.getInput('AuthorLink');
         this._title = Task.getInput('Title');
         this._titleLink = Task.getInput('TitleLink');
         this._preText = Task.getInput('PreText');
+        this._useVariableForPreText = Task.getBoolInput('UseVariableForPreText');
         this._text = Task.getInput('Text');
+        this._useVariableForText = Task.getBoolInput('UseVariableForText');
         this._color = Task.getInput('Color');
         this._imageUrl = Task.getInput('ImageUrl');
         this._footerText = Task.getInput('FooterText');
@@ -69,9 +75,16 @@ export class TaskInput implements ITaskInput {
 
     get Message(): string {
         if (this._message) {
-            return this.formatMultilineText(this._message);
+            if (this._useVariableForMessage) {
+                return Task.getVariable(this._message.trim());
+            }
+            return this.handleEscapeCharacters(this._message);
         }
         return '';
+    }
+
+    get UseVariableForMessage(): boolean {
+        return this._useVariableForMessage;
     }
 
     get SlackApiToken(): string {
@@ -118,16 +131,30 @@ export class TaskInput implements ITaskInput {
 
     get PreText(): string {
         if (this._preText) {
-            return this.formatMultilineText(this._preText);
+            if (this._useVariableForPreText) {
+                return Task.getVariable(this._preText.trim());
+            }
+            return this.handleEscapeCharacters(this._preText);
         }
         return '';
     }
 
+    get UseVariableForPreText(): boolean {
+        return this._useVariableForPreText;
+    }
+
     get Text(): string {
         if (this._text) {
-            return this.formatMultilineText(this._text);
+            if (this._useVariableForText) {
+                return Task.getVariable(this._text.trim());
+            }
+            return this.handleEscapeCharacters(this._text);
         }
         return '';
+    }
+
+    get UseVariableForText(): boolean {
+        return this._useVariableForText;
     }
 
     get Color(): string {
@@ -204,13 +231,16 @@ export class TaskInput implements ITaskInput {
             channel: this._channel,
             uploadFilePath: this._uploadFilePath,
             message: this._message,
+            useVariableForMessage: this._useVariableForMessage,
             iconUrl: this._iconUrl,
             authorName: this._authorName,
             authorLink: this._authorLink,
             title: this._title,
             titleLink: this._titleLink,
             preText: this._preText,
+            useVariableForPreText: this._useVariableForPreText,
             text: this._text,
+            useVariableForText: this._useVariableForText,
             color: this._color,
             imageUrl: this._imageUrl,
             footerText: this._footerText,
@@ -224,10 +254,8 @@ export class TaskInput implements ITaskInput {
         return JSON.stringify(obj);
     }
 
-    formatMultilineText(input: string): string {
+    handleEscapeCharacters(input: string): string {
         return input
-            .replace(new RegExp('\n', 'g'), '`n')
-            .replace(new RegExp('\t', 'g'), '`t')
             .replace(new RegExp('`n', 'g'), '\n')
             .replace(new RegExp('`t', 'g'), '\t');
     }
