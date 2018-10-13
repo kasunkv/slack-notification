@@ -1,4 +1,3 @@
-import { ILogger } from './interfaces/ILogger';
 import { inject, injectable } from 'inversify';
 import { WebClient, WebAPICallResult } from '@slack/client/dist';
 
@@ -7,6 +6,7 @@ import TYPES from './di/types';
 import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackClient } from './interfaces/ISlackClient';
 import { ISlackChannelService } from './interfaces/ISlackChannelService';
+import { ILogger } from './interfaces/ILogger';
 
 @injectable()
 export class SlackChannelService implements ISlackChannelService {
