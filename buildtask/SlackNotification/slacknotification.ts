@@ -8,12 +8,14 @@ import { ITaskInput } from './interfaces/ITaskInput';
 import { ISlackChatMessage } from './interfaces/ISlackChatMessage';
 import { ISlackFileUpload } from './interfaces/ISlackFileUpload';
 import { ILogger } from './interfaces/ILogger';
+import { IMonitoring } from './interfaces/IMonitoring';
 
 import { NotificationType } from './Constants';
 
 Task.setResourcePath(path.join(__dirname, 'task.json'));
 
 async function run(): Promise<string> {
+    const monitoring = container.get<IMonitoring>(TYPES.IMonitoring);
     const promise = new Promise<string>(async (resolve, reject) => {
         try {
 
@@ -21,6 +23,7 @@ async function run(): Promise<string> {
             const logger = container.get<ILogger>(TYPES.ILogger);
 
             logger.logDebug(taskInput.toJSON());
+            monitoring.configure();
 
             switch (taskInput.NotificationType) {
 
@@ -41,6 +44,7 @@ async function run(): Promise<string> {
             }
 
         } catch (err) {
+            monitoring.captureException(err);
             reject(err.message || err);
         }
     });
