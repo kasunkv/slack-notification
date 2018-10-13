@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/kasunkv/slack-notification#readme",
   "dependencies": {
+    "@sentry/node": "^4.1.1",
     "@slack/client": "^4.1.0",
     "inversify": "^4.11.1",
     "reflect-metadata": "^0.1.12",
