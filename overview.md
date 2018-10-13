@@ -1,15 +1,15 @@
-Slack Notification task with advanced slack message customization for Visual Studio Team Services. The task includes the ability to send optional attachments with the standard slack messages.
+Slack Notification task with advanced slack message customization for Azure DevOps. The task includes the ability to send optional attachments with the standard slack messages.
 [Visual Studio Marketplace: Slack Notification](https://marketplace.visualstudio.com/items?itemName=kasunkodagoda.slack-notification)
 
 # Using Slack Notification Task
 Follow the instructions below to configure the Slack Notification task to send messages to a slack channel or a user.
 
 ## Getting the Slack API Token
-You will need to generate an API token and include it as a secure variable in Visual Studio Team Services build/release definition. You can generate the API token using the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens).
+You will need to generate an API token and include it as a secure variable in Azure DevOps build/release definition. You can generate the API token using the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens).
 
 
 ### Add the Slack Notification Task
-Install the Slack Notification task in to your Visual Studio Team Services account and Search for the task and add it to your build/release definition.
+Install the Slack Notification task in to your Azure DevOps account and Search for the task and add it to your build/release definition.
 
 ![Add Slack Notification Task](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-add-slack-notification-task.png)
 

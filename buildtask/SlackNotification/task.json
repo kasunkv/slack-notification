@@ -3,7 +3,7 @@
     "id": "705424a3-ef1f-4c70-8dd0-56a63772146c",
     "name": "SlackNotification",
     "friendlyName": "Slack Notification",
-    "description": "Slack Notification task with advanced slack message customization for Visual Studio Team Services. The task includes the ability to send optional attachments with the standard slack messages",
+    "description": "Slack Notification task with advanced slack message customization for Azure DevOps. The task includes the ability to send optional attachments with the standard slack messages",
     "helpMarkDown": "[More Information](https://github.com/kasunkv/slack-notification)",
     "category": "Utility",
     "visibility": [
@@ -47,7 +47,7 @@
             "type": "string",
             "label": "Message Author",
             "required": true,
-            "defaultValue": "Visual Studio Team Services",
+            "defaultValue": "Azure DevOps",
             "groupName": "slackConfig",
             "helpMarkDown": "Text shown as the author of the message in Slack."
         },
