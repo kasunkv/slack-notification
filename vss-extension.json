@@ -40,6 +40,9 @@
         },
         "license": {
             "path": "license.md"
+        },
+        "privacypolicy": {
+            "path": "privacy-policy.md"
         }
     },
     "links": {
