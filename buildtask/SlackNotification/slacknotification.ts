@@ -1,4 +1,4 @@
-import * as Task from 'vsts-task-lib';
+import * as Task from 'azure-pipelines-task-lib/task';
 import * as path from 'path';
 
 import container from './di/inversify.config';

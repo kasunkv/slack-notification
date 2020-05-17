@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { WebClient, WebAPICallResult } from '@slack/client/dist';
+import { WebClient, WebAPICallResult } from '@slack/web-api';
 
 import TYPES from './di/types';
 
@@ -177,8 +177,8 @@ export class SlackChannelService implements ISlackChannelService {
   }
 
   private getSlackChannelIdByUserId(userId: string): Promise<WebAPICallResult> {
-    return this._client.im.open({
-      user: userId
+    return this._client.conversations.open({
+      users: userId
     });
   }
 

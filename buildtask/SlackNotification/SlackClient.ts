@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { WebClient } from '@slack/client';
+import { WebClient } from '@slack/web-api';
 
 import TYPES from './di/types';
 import { ISlackClient } from './interfaces/ISlackClient';
@@ -23,5 +23,5 @@ export class SlackClient implements ISlackClient {
             return this._client;
         }
         return new WebClient(this._taskInputs.SlackApiToken);
-    }    
+    }
 }

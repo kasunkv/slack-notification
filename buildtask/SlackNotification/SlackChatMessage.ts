@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { WebClient, WebAPICallResult } from '@slack/client/dist';
+import { WebClient, WebAPICallResult } from '@slack/web-api';
 
 import TYPES from './di/types';
 
