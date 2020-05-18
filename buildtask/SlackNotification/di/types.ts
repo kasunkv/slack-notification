@@ -7,13 +7,13 @@ import { ISlackClient } from '../interfaces/ISlackClient';
 import { ITaskInput } from '../interfaces/ITaskInput';
 
 const TYPES = {
-    ITaskInput: Symbol('ITaskInput'),
-    ISlackClient: Symbol('ISlackClient'),
-    ISlackChatMessage: Symbol('ISlackChatMessage'),
-    ISlackFileUpload: Symbol('ISlackFileUpload'),
-    ISlackChannelService: Symbol('ISlackChannelService'),
-    ILogger: Symbol('ILogger'),
-    IMonitoring: Symbol('IMonitoring')
+    ITaskInput: Symbol.for('ITaskInput'),
+    ISlackClient: Symbol.for('ISlackClient'),
+    ISlackChatMessage: Symbol.for('ISlackChatMessage'),
+    ISlackFileUpload: Symbol.for('ISlackFileUpload'),
+    ISlackChannelService: Symbol.for('ISlackChannelService'),
+    ILogger: Symbol.for('ILogger'),
+    IMonitoring: Symbol.for('IMonitoring')
 };
 
 export default TYPES;
