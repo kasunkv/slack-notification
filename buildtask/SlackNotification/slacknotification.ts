@@ -15,30 +15,30 @@ import { NotificationType } from './Constants';
 Task.setResourcePath(path.join(__dirname, 'task.json'));
 
 async function run(): Promise<string> {
-    Task.debug("Starting...");
+    Task.debug('Starting...');
     const monitoring = container.get<IMonitoring>(TYPES.IMonitoring);
     const promise = new Promise<string>(async (resolve, reject) => {
         try {
-            Task.debug("Getting TaskInput & Logger");
+            Task.debug('Getting TaskInput & Logger');
             const taskInput = container.get<ITaskInput>(TYPES.ITaskInput);
             const logger = container.get<ILogger>(TYPES.ILogger);
 
-            Task.debug("Printing contents of TaskInput");
+            Task.debug('Printing contents of TaskInput');
             logger.logDebug(taskInput.toJSON());
-            Task.debug("Configuring Monitoring");
+            Task.debug('Configuring Monitoring');
             monitoring.configure();
 
             switch (taskInput.NotificationType) {
 
                 case NotificationType.CHAT_MESSAGE:
-                    Task.debug("Start sending ChatMessage");
+                    Task.debug('Start sending ChatMessage');
                     const chatMessage = container.get<ISlackChatMessage>(TYPES.ISlackChatMessage);
                     const chatResult: string = await chatMessage.send();
                     resolve(chatResult);
                     break;
 
                 case NotificationType.FILE_UPLOAD:
-                    Task.debug("Start UploadFile");
+                    Task.debug('Start UploadFile');
                     const fileUpload = container.get<ISlackFileUpload>(TYPES.ISlackFileUpload);
                     const uploadResult: string = await fileUpload.upload();
                     resolve(uploadResult);
