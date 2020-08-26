@@ -8,6 +8,19 @@ Slack Notification task with advanced slack message customization for Azure DevO
 Follow the instructions below to configure the Slack Notification task to send messages to a slack channel or a user.
 
 ## Getting the Slack API Token
+
+### v6.x and Above
+The latest version of the Slack Notification task will use Slack Apps for authenticating with the Slack API. You will need the following **User Token Scopes** included in your token for the task to work properly.
+
+* _chat:write_
+* _files:write_
+* _im:write_
+* _mpim:write_
+* _users:read_
+
+Please follow [Generate Slack Token with Slack Apps](generate-slack-token.md)  page for mode details on how to create a Slack App for authentication.
+
+### v5.x and Below _[Deprecated]_
 You will need to generate an API token and include it as a secure variable in Azure DevOps build/release definition. You can generate the API token using the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens).
 
 
@@ -23,15 +36,15 @@ Send Slack Notification section contains some required configuration options.
 ![Required Configuration](https://raw.githubusercontent.com/kasunkv/slack-notification/master/screenshots/screenshot-required-options.png)
 
 ### Required Configuration
- 
+
  * **Message Author**: Text shown as the author of the message in Slack.
  * **Channel or User**: A comma **(,)** separated list of channel names and/or user's name, real name or display name. Can be any combination. Channel names must be prefixed with **#** and user's names must be prefixed with **@**. If **#** or **@** is not used, the value is considered as either a real name or a display name. You can use any combination of channel name, user's name, real name and display name. _(e.g. #general, @johnd, #build, @janedoe, John Doe)_.
  * **Slack API Token**: Slack API Token generated from the [Slack Token Generator](https://api.slack.com/custom-integrations/legacy-tokens). Save the token in a secure build variable.
  * **Icon URL**: _(Optional)_ The icon that will be shown along side the message.
 
 ## Notification Options
-Slack Notification task provides support for sending attachments along with the message. Sending attachments is optional. There are several configuration options provided, as described below. 
- 
+Slack Notification task provides support for sending attachments along with the message. Sending attachments is optional. There are several configuration options provided, as described below.
+
  * **Notification Type**: Select the type of notification. Use _Send Chat Message_ to send a message to a slack Channel. Use _Upload File_ to upload a file to a slack channel
 
  #### Notification Type: Send Chat Message
