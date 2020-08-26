@@ -4,7 +4,7 @@ import { inject, injectable } from 'inversify';
 import TYPES from './di/types';
 
 import { IMonitoring } from './interfaces/IMonitoring';
-import { SentryEvent } from '@sentry/node';
+// import { SentryEvent } from '@sentry/node';
 import { ILogger } from './interfaces/ILogger';
 
 @injectable()
@@ -28,9 +28,9 @@ export class Monitoring implements IMonitoring {
         sentry.captureException(error);
     }
 
-    captureEvent(event: SentryEvent): void {
-        sentry.captureEvent(event);
-    }
+    // captureEvent(event: SentryEvent): void {
+    //     sentry.captureEvent(event);
+    // }
 
     captureMessage(message: string): void {
         sentry.captureMessage(message);

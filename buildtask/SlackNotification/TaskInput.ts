@@ -1,33 +1,33 @@
-import * as Task from 'vsts-task-lib';
+import * as Task from 'azure-pipelines-task-lib/task';
 import { injectable } from 'inversify';
 
 import { ITaskInput } from './interfaces/ITaskInput';
 
 @injectable()
 export class TaskInput implements ITaskInput {
-    private _messageAuthor: string;
-    private _channel: string;
-    private _message: string;
+    private _messageAuthor: string | undefined;
+    private _channel: string | undefined;
+    private _message: string | undefined;
     private _useVariableForMessage: boolean;
-    private _slackApiToken: string;
-    private _iconUrl: string;
-    private _authorName: string;
-    private _authorLink: string;
-    private _title: string;
-    private _titleLink: string;
-    private _preText: string;
+    private _slackApiToken: string | undefined;
+    private _iconUrl: string | undefined;
+    private _authorName: string | undefined;
+    private _authorLink: string | undefined;
+    private _title: string | undefined;
+    private _titleLink: string | undefined;
+    private _preText: string | undefined;
     private _useVariableForPreText: boolean;
-    private _text: string;
+    private _text: string | undefined;
     private _useVariableForText: boolean;
-    private _color: string;
-    private _imageUrl: string;
-    private _footerText: string;
-    private _footerIcon: string;
+    private _color: string | undefined;
+    private _imageUrl: string | undefined;
+    private _footerText: string | undefined;
+    private _footerIcon: string | undefined;
     private _showFooterTimestamp: boolean;
-    private _notificationType: string;
-    private _uploadFilePath: string;
-    private _fileTitle: string;
-    private _fileComment: string;
+    private _notificationType: string | undefined;
+    private _uploadFilePath: string | undefined;
+    private _fileTitle: string | undefined;
+    private _fileComment: string | undefined;
 
     constructor() {
         // Required Inputs
@@ -76,7 +76,7 @@ export class TaskInput implements ITaskInput {
     get Message(): string {
         if (this._message) {
             if (this._useVariableForMessage) {
-                return Task.getVariable(this._message.trim());
+                return Task.getVariable(this._message.trim()) ?? '';
             }
             return this.handleEscapeCharacters(this._message);
         }
@@ -132,7 +132,7 @@ export class TaskInput implements ITaskInput {
     get PreText(): string {
         if (this._preText) {
             if (this._useVariableForPreText) {
-                return Task.getVariable(this._preText.trim());
+                return Task.getVariable(this._preText.trim()) ?? '';
             }
             return this.handleEscapeCharacters(this._preText);
         }
@@ -146,7 +146,7 @@ export class TaskInput implements ITaskInput {
     get Text(): string {
         if (this._text) {
             if (this._useVariableForText) {
-                return Task.getVariable(this._text.trim());
+                return Task.getVariable(this._text.trim()) ?? '';
             }
             return this.handleEscapeCharacters(this._text);
         }

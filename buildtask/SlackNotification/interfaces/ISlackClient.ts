@@ -1,5 +1,5 @@
-import { WebClient } from '@slack/client';
+import { WebClient } from '@slack/web-api';
 
 export interface ISlackClient {
-    getInstance(): WebClient;         
+    getInstance(): WebClient;
 }

@@ -263,7 +263,7 @@
     ],
     "instanceNameFormat": "Post Slack Notification",
     "execution": {
-        "Node": {
+        "Node10": {
             "target": "slacknotification.js",
             "argumentFormat": ""
         }
